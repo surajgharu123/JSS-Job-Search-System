@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class JssEmployeeApplication {
 
-	//Hello Second Update commit
+	//Hello Second Update commit new
 	public static void main(String[] args) {
 		SpringApplication.run(JssEmployeeApplication.class, args);
 	}
