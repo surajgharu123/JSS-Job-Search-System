@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class JssApiGatewayApplication {
 
-
+//hello
 	public static void main(String[] args) {
 		SpringApplication.run(JssApiGatewayApplication.class, args);
 	}
