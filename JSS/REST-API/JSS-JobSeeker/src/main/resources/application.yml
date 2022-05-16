@@ -1,0 +1,14 @@
+server:
+  port: 5302
+ 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jss_db_jobseeker
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate :
+        dialect: org.hibernate.dialect.MySQL8Dialect
