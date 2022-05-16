@@ -1,0 +1,30 @@
+server:
+  port: 5500
+  
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: USER-SERVICE
+        uri: lb://USER-SERVICE
+        predicates:
+          - Path=/jss/user/**
+      - id: JOBSEEKER-SERVICE
+        uri: lb://JOBSEEKER-SERVICE
+        predicates:
+          - Path=/jss/jobseeker/**
+      - id: EMPLOYEE-SERVICE
+        uri: lb://EMPLOYEE-SERVICE
+        predicates:
+          - Path=/jss/employee/**
+          
+    
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${random.uuid}  
