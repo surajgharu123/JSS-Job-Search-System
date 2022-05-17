@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.jss.jobseeker.dto.JobDTO;
 import com.jss.jobseeker.entity.JobEntity;
+import com.jss.jobseeker.exception.InvalidSearchingDataException;
 import com.jss.jobseeker.repo.JobSeekerRepo;
 
 @Service
@@ -65,6 +66,9 @@ public class JobSeekerServiceImple implements JobSeekerService {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
 		
+		if(jobDTOs.isEmpty()) {
+			throw new InvalidSearchingDataException("Seaching Data is not Found");
+		}
 		
 		return jobDTOs;
 	}
@@ -119,6 +123,9 @@ public class JobSeekerServiceImple implements JobSeekerService {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
 		
+		if(jobDTOs.isEmpty()) {
+			throw new InvalidSearchingDataException("Entered Location is not Found");
+		}
 		
 		return jobDTOs;
 	}
@@ -133,6 +140,6 @@ public class JobSeekerServiceImple implements JobSeekerService {
 			return ConvertEntityToDTO(jobEntity.get());
 			
 		}
-		return null;
+		throw new InvalidSearchingDataException("Id is not Found");
 	}
 }
