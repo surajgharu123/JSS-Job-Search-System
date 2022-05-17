@@ -37,14 +37,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		CriteriaQuery<JobEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobEntity.class);
 		Root<JobEntity> rootDTO = criteriaQueryEntity.from(JobEntity.class);
 		
-		// Like, in , or , and  multiple 
-		//where 
-		/**
-		 * root => {
-		 * "" : ""
-		 * }
-		 */
-		//SELECT * FROM JOB WHERE Infosys = %Zensar%;
+		
 		//
 		Predicate companyNamePredicate = criteriaBuilder.and();
 		Predicate skillsPredicate = criteriaBuilder.and();
@@ -88,7 +81,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 	@Override
 	public List<JobDTO> getAllRecords() {
 		// TODO Auto-generated method stub
-		List<JobEntity> jobEntities = jobSeekerRepo.getAllJobs();
+		List<JobEntity> jobEntities = jobSeekerRepo.findAll();
 		List<JobDTO> jobDTOs = new ArrayList<>();
 		for(JobEntity jobEntity : jobEntities) {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
