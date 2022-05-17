@@ -1,22 +1,21 @@
 package com.jss.user.exception;
 
-public class InvalidCredentialsException extends RuntimeException{
-private String message;
+public class InvalidCredentialsException extends RuntimeException {
+	private String message;
 
-public InvalidCredentialsException() {
+	public InvalidCredentialsException() {
 
-this.message = "";
-}
-public InvalidCredentialsException(String message) {
+		this.message = "";
+	}
 
-this.message = message;
-}
+	public InvalidCredentialsException(String message) {
 
-@Override
-public String toString() {
-return "Invalid Credentials :" +this.message;
-}
+		this.message = message;
+	}
 
-
+	@Override
+	public String toString() {
+		return "Invalid Credentials :" + this.message;
+	}
 
 }
