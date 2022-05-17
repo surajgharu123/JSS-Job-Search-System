@@ -1,20 +1,9 @@
-package com.jss.jobseeker.entity;
+package com.jss.jobseeker.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "JOB")
-public class JobSeekerEntity {
+public class JobDTO {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int Id;
 	private String jobTitle;
 	private String location;
@@ -26,17 +15,17 @@ public class JobSeekerEntity {
 	private String Status;
 	private String skills;
 	private String companyName;
-	public JobSeekerEntity() {
+	
+	public JobDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	
-
 	
-	public JobSeekerEntity(int id, String jobTitle, String location, String description, Integer experience,
-			Double salary, Integer noticePeriod, String contactEmail, String status, String skills,
-			String companyName) {
+
+	public JobDTO(int id, String jobTitle, String location, String description, Integer experience, Double salary,
+			Integer noticePeriod, String contactEmail, String status, String skills, String companyName) {
 		super();
 		Id = id;
 		this.jobTitle = jobTitle;
@@ -58,8 +47,8 @@ public class JobSeekerEntity {
 		return Id;
 	}
 
-	public void setId(int Id) {
-		this.Id = Id;
+	public void setId(int id) {
+		this.Id = id;
 	}
 
 	public String getJobTitle() {
@@ -125,7 +114,7 @@ public class JobSeekerEntity {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	
+
 	public String getSkills() {
 		return skills;
 	}
@@ -143,12 +132,20 @@ public class JobSeekerEntity {
 		this.companyName = companyName;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "JobSeekerEntity [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
+		return "JobSeekerDTO [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
 				+ description + ", experience=" + experience + ", salary=" + salary + ", noticePeriod=" + noticePeriod
 				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
 				+ companyName + "]";
 	}
+
+	
+
+
+	
 
 }
