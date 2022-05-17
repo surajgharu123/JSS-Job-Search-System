@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.jss.employee.dto.Job;
 import com.jss.employee.entity.JobEntity;
+import com.jss.employee.exception.InvalidIdException;
+import com.jss.employee.repo.JobRepo;
 
 
 @Service
@@ -26,6 +28,9 @@ public class JobServiceImpl implements JobService{
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	JobRepo jobRepo;
 
 
 	
@@ -35,6 +40,11 @@ public class JobServiceImpl implements JobService{
 	}
 
 
+	@Override
+	public Boolean deleteJobById(int id) {
+		jobRepo.deleteById(id);
+		return true;
+	}
 
 	@Override
 	public List<Job> searchByJobId(Integer id) {
@@ -62,6 +72,10 @@ public class JobServiceImpl implements JobService{
 		jobDTOs.add(convertEntityIntoDTO(job));
 		}
 
+		if(jobDTOs.isEmpty())
+		{
+			throw new InvalidIdException("Entered Search Id not Avaiable");
+		}
 		return jobDTOs;
 	}
 	}
