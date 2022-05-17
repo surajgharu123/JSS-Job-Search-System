@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOB")
-public class JobSeekerEntity {
+public class JobEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -26,7 +26,7 @@ public class JobSeekerEntity {
 	private String Status;
 	private String skills;
 	private String companyName;
-	public JobSeekerEntity() {
+	public JobEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +34,7 @@ public class JobSeekerEntity {
 	
 
 	
-	public JobSeekerEntity(int id, String jobTitle, String location, String description, Integer experience,
+	public JobEntity(int id, String jobTitle, String location, String description, Integer experience,
 			Double salary, Integer noticePeriod, String contactEmail, String status, String skills,
 			String companyName) {
 		super();
@@ -145,7 +145,7 @@ public class JobSeekerEntity {
 
 	@Override
 	public String toString() {
-		return "JobSeekerEntity [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
+		return "JobEntity [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
 				+ description + ", experience=" + experience + ", salary=" + salary + ", noticePeriod=" + noticePeriod
 				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
 				+ companyName + "]";

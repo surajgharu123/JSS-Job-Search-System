@@ -15,5 +15,7 @@ public interface JobSeekerService {
 	
 	public JobDTO addrecords(JobDTO jobDTO);
 	public List<JobDTO> searchByLocation(String location);
+	
+	public JobDTO getJobByID(int id);
 
 }
