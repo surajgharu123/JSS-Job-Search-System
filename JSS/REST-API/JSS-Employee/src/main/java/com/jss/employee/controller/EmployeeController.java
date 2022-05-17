@@ -21,6 +21,8 @@ import com.jss.employee.service.JobService;
 import com.jss.employee.dto.*;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -56,14 +58,16 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> deleteJobById( @PathVariable("id") int id) {
+	@ApiOperation(value = "Deleting a Job by Job Id", notes = "This Rest API will delete Job by Job Id")
+	public ResponseEntity<Boolean> deleteJobById(@ApiParam(value="JobID", name="Deleting Job") @PathVariable("id") int id) {
 		return new ResponseEntity<Boolean> (jobService.deleteJobById(id),HttpStatus.OK);
 	}
 	
     @PutMapping(value = "/update/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Employee> updateJob(@RequestBody Employee employee, @PathVariable("id") int id) {
+    @ApiOperation(value = "Updating Job by Job Id", notes = "This Rest API will update Job by Job Id")
+    public ResponseEntity<Employee> updateJob(@RequestBody Employee employee, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id) {
 		return new ResponseEntity<Employee>(employeeService.updateJob( id, employee),HttpStatus.OK);
 
 	}
