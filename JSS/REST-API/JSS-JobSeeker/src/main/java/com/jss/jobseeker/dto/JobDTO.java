@@ -2,18 +2,33 @@ package com.jss.jobseeker.dto;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Job DTO")
 public class JobDTO {
 	
+	@ApiModelProperty(value = "Job ID")
 	private int Id;
+	@ApiModelProperty(value = "Job Title")
 	private String jobTitle;
+	@ApiModelProperty(value = "Job Location")
 	private String location;
+	@ApiModelProperty(value = "Job Description")
 	private String description;
+	@ApiModelProperty(value = "Job Experience")
 	private Integer experience;
+	@ApiModelProperty(value = "Job Salary")
 	private Double salary;
+	@ApiModelProperty(value = "Notice-Period")
 	private Integer noticePeriod;
+	@ApiModelProperty(value = "Contact Email")
 	private String ContactEmail;
+	@ApiModelProperty(value = "Status")
 	private String Status;
+	@ApiModelProperty(value = "Skills")
 	private String skills;
+	@ApiModelProperty(value = "Company Name")
 	private String companyName;
 	
 	public JobDTO() {

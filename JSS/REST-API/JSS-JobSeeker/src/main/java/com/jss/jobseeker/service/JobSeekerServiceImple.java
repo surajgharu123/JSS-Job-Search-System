@@ -2,8 +2,8 @@ package com.jss.jobseeker.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jss.jobseeker.dto.JobDTO;
-import com.jss.jobseeker.entity.JobSeekerEntity;
+import com.jss.jobseeker.entity.JobEntity;
 import com.jss.jobseeker.repo.JobSeekerRepo;
 
 @Service
@@ -34,8 +34,8 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		// TODO Auto-generated method stub
 		
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<JobSeekerEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobSeekerEntity.class);
-		Root<JobSeekerEntity> rootDTO = criteriaQueryEntity.from(JobSeekerEntity.class);
+		CriteriaQuery<JobEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobEntity.class);
+		Root<JobEntity> rootDTO = criteriaQueryEntity.from(JobEntity.class);
 		
 		// Like, in , or , and  multiple 
 		//where 
@@ -65,42 +65,42 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		
 		criteriaQueryEntity.where(finalPredicate);
 		
-		TypedQuery<JobSeekerEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
-		List<JobSeekerEntity> jobSeekerEntities = typedQuery.getResultList();
-		List<JobDTO> jobSeekerDTOs = new ArrayList<>();
-		for(JobSeekerEntity jobseeker : jobSeekerEntities) {
-			jobSeekerDTOs.add(ConvertEntityToDTO(jobseeker));
+		TypedQuery<JobEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
+		List<JobEntity> jobEntities = typedQuery.getResultList();
+		List<JobDTO> jobDTOs = new ArrayList<>();
+		for(JobEntity jobEntity : jobEntities) {
+			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
 		
 		
-		return jobSeekerDTOs;
+		return jobDTOs;
 	}
 	
-	public JobSeekerEntity ConvertDTOToEntity(JobDTO jobSeekerDTO) {
+	public JobEntity ConvertDTOToEntity(JobDTO jobSeekerDTO) {
 		
-		return modelMapper.map(jobSeekerDTO, JobSeekerEntity.class);
+		return modelMapper.map(jobSeekerDTO, JobEntity.class);
 	}
 
-	public JobDTO ConvertEntityToDTO(JobSeekerEntity jobSeekerEntity) {
+	public JobDTO ConvertEntityToDTO(JobEntity jobSeekerEntity) {
 		return modelMapper.map(jobSeekerEntity, JobDTO.class);
 	}
 
 	@Override
 	public List<JobDTO> getAllRecords() {
 		// TODO Auto-generated method stub
-		List<JobSeekerEntity> jobSeekerEntities = jobSeekerRepo.getAllJobs();
-		List<JobDTO> jobSeekerDTOs = new ArrayList<>();
-		for(JobSeekerEntity jobseeker : jobSeekerEntities) {
-			jobSeekerDTOs.add(ConvertEntityToDTO(jobseeker));
+		List<JobEntity> jobEntities = jobSeekerRepo.getAllJobs();
+		List<JobDTO> jobDTOs = new ArrayList<>();
+		for(JobEntity jobEntity : jobEntities) {
+			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
-		return jobSeekerDTOs;
+		return jobDTOs;
 	}
 
 	@Override
 	public JobDTO addrecords(JobDTO jobSeekerDTO) {
 		
 		// TODO Auto-generated method stub
-		JobSeekerEntity jobSeekerEntity = jobSeekerRepo.save(ConvertDTOToEntity(jobSeekerDTO));
+		JobEntity jobSeekerEntity = jobSeekerRepo.save(ConvertDTOToEntity(jobSeekerDTO));
 		return ConvertEntityToDTO(jobSeekerEntity);
 	}
 
@@ -108,8 +108,8 @@ public class JobSeekerServiceImple implements JobSeekerService {
 	public List<JobDTO> searchByLocation(String location) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<JobSeekerEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobSeekerEntity.class);
-		Root<JobSeekerEntity> rootDTO = criteriaQueryEntity.from(JobSeekerEntity.class);
+		CriteriaQuery<JobEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobEntity.class);
+		Root<JobEntity> rootDTO = criteriaQueryEntity.from(JobEntity.class);
 		
 		Predicate locationPredicate = criteriaBuilder.and();
 		
@@ -119,14 +119,27 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		
         criteriaQueryEntity.where(locationPredicate);
 		
-		TypedQuery<JobSeekerEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
-		List<JobSeekerEntity> jobSeekerEntities = typedQuery.getResultList();
-		List<JobDTO> jobSeekerDTOs = new ArrayList<>();
-		for(JobSeekerEntity jobseeker : jobSeekerEntities) {
-			jobSeekerDTOs.add(ConvertEntityToDTO(jobseeker));
+		TypedQuery<JobEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
+		List<JobEntity> jobEntities = typedQuery.getResultList();
+		List<JobDTO> jobDTOs = new ArrayList<>();
+		for(JobEntity jobEntity : jobEntities) {
+			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
 		
 		
-		return jobSeekerDTOs;
+		return jobDTOs;
+	}
+
+	@Override
+	public JobDTO getJobByID(int id) {
+		// TODO Auto-generated method stub
+		
+		Optional<JobEntity> jobEntity = jobSeekerRepo.findById(id);
+		if(jobEntity.isPresent())
+		{
+			return ConvertEntityToDTO(jobEntity.get());
+			
+		}
+		return null;
 	}
 }
