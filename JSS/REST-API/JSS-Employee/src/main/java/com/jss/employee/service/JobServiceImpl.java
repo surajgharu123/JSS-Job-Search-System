@@ -16,16 +16,25 @@ import org.springframework.stereotype.Service;
 
 import com.jss.employee.dto.Job;
 import com.jss.employee.entity.JobEntity;
+import com.jss.employee.exception.InvalidAuthTokenException;
+import com.jss.employee.exception.InvalidIdException;
+import com.jss.employee.repo.JobRepo;
 
 
 @Service
 public class JobServiceImpl implements JobService{
 	
 	@Autowired
+	EmployeeServiceDelegate employeeServiceDelegate;
+	
+	@Autowired
 	EntityManager entityManager;
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	JobRepo jobRepo;
 
 
 	
@@ -35,9 +44,16 @@ public class JobServiceImpl implements JobService{
 	}
 
 
+	@Override
+	public Boolean deleteJobById(int id) {
+		jobRepo.deleteById(id);
+		return true;
+	}
 
 	@Override
-	public List<Job> searchByJobId(Integer id) {
+	public List<Job> searchByJobId(Integer id,String authToken) {
+		
+		if(employeeServiceDelegate.isTokenValid(authToken)) {
 		
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<JobEntity> criteriaQuery = criteriaBuilder.createQuery(JobEntity.class);
@@ -62,8 +78,17 @@ public class JobServiceImpl implements JobService{
 		jobDTOs.add(convertEntityIntoDTO(job));
 		}
 
+		if(jobDTOs.isEmpty())
+		{
+			throw new InvalidIdException("Entered Search Id not Avaiable");
+		}
 		return jobDTOs;
 	}
+		else 
+			throw new InvalidAuthTokenException(authToken);
+		
+	}
+	
 	}
 	
 	

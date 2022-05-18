@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.jss.employee.dto.*;
 import com.jss.employee.entity.JobSeekerEntity;
+import com.jss.employee.exception.DataNotFoundException;
 import com.jss.employee.repo.JobSeekerRepo;
 
 
@@ -58,6 +59,10 @@ public class JobSeekerServiceImple  implements JobSeekerService {
 		jobSeekerDTOs.add(convertEntityIntoDTO(jobseeker));
 		}
 
+		if(jobSeekerDTOs.isEmpty())
+		{
+			throw new DataNotFoundException();
+		}
 		return jobSeekerDTOs;
 		
 		

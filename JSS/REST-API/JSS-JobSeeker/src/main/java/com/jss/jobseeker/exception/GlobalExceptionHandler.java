@@ -1,4 +1,4 @@
-package com.jss.user.exception;
+package com.jss.jobseeker.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(value = InvalidCredentialsException.class)
+	@ExceptionHandler(value = InvalidSearchingDataException.class)
 	public ResponseEntity<Object> handleConflict(RuntimeException exception, WebRequest request) {
 		String errorMessage = "{\"error\":" + exception.toString() + " \"}";
 		ResponseEntity<Object> response = handleExceptionInternal(exception, errorMessage, new HttpHeaders(),

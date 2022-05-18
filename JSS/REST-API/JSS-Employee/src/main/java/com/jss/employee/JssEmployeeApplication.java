@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 //import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 //import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +24,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class JssEmployeeApplication {
 
-	//Hello Second Update commit new
+	
 	public static void main(String[] args) {
 		SpringApplication.run(JssEmployeeApplication.class, args);
 	}
-	
-	
 
 	@Bean
 	public ModelMapper getMapping() {
@@ -36,6 +35,7 @@ public class JssEmployeeApplication {
 	}
 	
 	@Bean
+	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}

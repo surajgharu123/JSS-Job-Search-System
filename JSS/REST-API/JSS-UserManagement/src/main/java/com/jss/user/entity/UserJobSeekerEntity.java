@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="JOBSEEKER")
-public class UserJobEntity {
+public class UserJobSeekerEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -78,7 +78,7 @@ public class UserJobEntity {
 		this.roles = roles;
 	}
 	
-	public UserJobEntity(int id, String name, String username, String password, String address, long contactNo,
+	public UserJobSeekerEntity(int id, String name, String username, String password, String address, long contactNo,
 			String email, String skillset, String roles) {
 		
 		this.id = id;
@@ -91,7 +91,7 @@ public class UserJobEntity {
 		this.skillset = skillset;
 		this.roles = roles;
 	}
-	public UserJobEntity() {
+	public UserJobSeekerEntity() {
 		
 	}
 	@Override

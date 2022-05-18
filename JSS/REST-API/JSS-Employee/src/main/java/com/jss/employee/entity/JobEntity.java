@@ -6,19 +6,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "JOB")
+@ApiModel(value="JOB DTO")
 public class JobEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@ApiModelProperty("Job ID")
 	private Integer id;
+	@ApiModelProperty("Job Title")
 	private String job_title;
+	@ApiModelProperty("Job Location")
 	private String location;
+	@ApiModelProperty("Job Description")
 	private String description;
+	@ApiModelProperty("Job Experience")
 	private int experience;
+	@ApiModelProperty("Job Salary")
 	private double salary;
+	@ApiModelProperty("Job Notice Period")
 	private int notice;
+	@ApiModelProperty("Contact Number")
 	private long contact_no;
+	@ApiModelProperty("Job Status")
 	private String status;
 	
 	public Integer getId() {

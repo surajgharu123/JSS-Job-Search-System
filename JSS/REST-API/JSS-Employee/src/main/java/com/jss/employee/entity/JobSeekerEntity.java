@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name="jobseeker")
 public class JobSeekerEntity {
@@ -13,13 +15,21 @@ public class JobSeekerEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@ApiModelProperty("Jobseeker ID")
 	private int id;
+	@ApiModelProperty("Jobseeker Name")
 	private String name;
+	@ApiModelProperty("Jobseeker Username")
 	private String username;
+	@ApiModelProperty("Jobseeker Password")
 	private String password;
+	@ApiModelProperty("Jobseeker Address")
 	private String address;
+	@ApiModelProperty("Jobseeker Contact Number")
 	private long contactNo;
+	@ApiModelProperty("Jobseeker Email")
 	private String email;
+	@ApiModelProperty("Jobseeker skillset")
 	private String skillset;
 
 	

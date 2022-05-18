@@ -6,25 +6,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name="Employee")
+@ApiModel(value = "Employee DTO")
 public class EmployeeEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@ApiModelProperty("Employee ID")
 	private int id;
+	@ApiModelProperty("Employee Name")
 	private String userName;
+	@ApiModelProperty("Employee Pasword")
 	private String password;
+	@ApiModelProperty("Employee Orgniztion Name")
 	private String orgnizationName;
+	@ApiModelProperty("Employee Address")
 	private String address;
+	@ApiModelProperty("Employee ID")
 	private String jobTitle;
+	@ApiModelProperty("Employee Location")
 	private String location;
+	@ApiModelProperty("Employee Description")
 	private String description;
+	@ApiModelProperty("Employee Experience")
 	private String experience;
+	@ApiModelProperty("Employee Salary")
 	private String salary;
+	@ApiModelProperty("Employee Notice Period")
 	private String noticePeriod;
+	@ApiModelProperty("Employee ID")
 	private String contact;
+	@ApiModelProperty("Employee Email")
 	private String email;
+	@ApiModelProperty("Employee Status")
 	private String status;
 	public EmployeeEntity(int id, String userName, String password, String orgnizationName, String address,
 			String jobTitle, String location, String description, String experience, String salary, String noticePeriod,

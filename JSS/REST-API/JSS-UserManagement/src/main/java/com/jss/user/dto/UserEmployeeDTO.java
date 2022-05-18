@@ -1,17 +1,12 @@
 package com.jss.user.dto;
 
-public class UserDTO {
+public class UserEmployeeDTO {
 
 	private int id;
 	private String userName;
 	private String password;
 	private String orgnizationName;
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
+	
 	private String address;
 	private String jobTitle;
 	private String location;
@@ -23,7 +18,12 @@ public class UserDTO {
 	private String email;
 	private String status;
 	private String role;
-	public UserDTO(int id, String userName, String password, String orgnizationName, String address, String jobTitle,
+	
+
+	public UserEmployeeDTO() {
+	}
+	
+	public UserEmployeeDTO(int id, String userName, String password, String orgnizationName, String address, String jobTitle,
 			String location, String description, int experience, int salary, int noticePeriod, int contact,
 			String email, String status, String role) {
 	
@@ -128,7 +128,11 @@ public class UserDTO {
 		this.status = status;
 	}
 
-	public UserDTO() {
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	@Override
 	public String toString() {

@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "User Job DTO")
-public class UserJobDTO {
+public class UserJobSeekerDTO {
 
 @ApiModelProperty(value = "JobSeeker Id")
 private int id;
@@ -81,7 +81,7 @@ public void setRoles(String roles) {
 	this.roles = roles;
 }
 
-public UserJobDTO(int id, String name, String username, String password, String address, long contactNo, String email,
+public UserJobSeekerDTO(int id, String name, String username, String password, String address, long contactNo, String email,
 		String skillset, String roles) {
 	this.id = id;
 	this.name = name;
@@ -93,7 +93,7 @@ public UserJobDTO(int id, String name, String username, String password, String 
 	this.skillset = skillset;
 	this.roles = roles;
 }
-public UserJobDTO() {
+public UserJobSeekerDTO() {
 
 }
 @Override

@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jss.user.entity.UserEntity;
+import com.jss.user.entity.UserEmployeeEntity;
 
 
-public interface UserRepo extends JpaRepository<UserEntity, Integer> {
+public interface UserEmployeeRepo extends JpaRepository<UserEmployeeEntity, Integer> {
 
 	//@Query(value = "SELECT job_title, location, description, experience, salary, notice_period, contact_email, status FROM JOB", nativeQuery = true)
 	//public List<JobSeekerEntity> getAllJobs();
-	public List<UserEntity> findByUserName(String userName);
+	public List<UserEmployeeEntity> findByUserName(String userName);
 }
