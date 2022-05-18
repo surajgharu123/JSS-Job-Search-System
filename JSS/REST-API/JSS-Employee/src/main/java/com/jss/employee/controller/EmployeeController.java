@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,19 +45,36 @@ public class EmployeeController {
 	
 	@GetMapping(value = "/search/filtercriteria", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of JobSeeker by FilterCriteria", notes = "This Rest API will return List of JobSeeker by Filter Criteria")
-	public ResponseEntity<List<JobSeeker>> searchAdvertisesByFilterCriteria(
+	public ResponseEntity<List<JobSeeker>> searchByFilterCriteria(
 			@RequestParam(name = "skillSet", required = false) String skillSet)
 			 {
-		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterAdvertise(skillSet), HttpStatus.OK);
+		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet), HttpStatus.OK);
 	}
 	
+//	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@ApiOperation(value = "Getting a List of Jobs by Job Id", notes = "This Rest API will return List of Jobs by Job Id")
+//	public ResponseEntity<List<Job>> searchByJobId(@RequestParam(name = "jobID", required = false) Integer id,
+//			@RequestHeader("Authorization") String authToken){
+//		List<Job> job1=this.jobService.searchByJobId(id,authToken);
+//		return new ResponseEntity<List<Job>>(job1, HttpStatus.OK);
+//	}
+	
+//    @PutMapping(value = "/update/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
+//			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+//					MediaType.APPLICATION_XML_VALUE })
+//    @ApiOperation(value = "Updating Job by Job Id", notes = "This Rest API will update Job by Job Id")
+    
+    
 	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of Jobs by Job Id", notes = "This Rest API will return List of Jobs by Job Id")
-	public ResponseEntity<List<Job>> searchByJobId(@RequestParam(name = "jobID", required = false) Integer id,
-			@RequestHeader("Authorization") String authToken){
-		List<Job> job1=this.jobService.searchByJobId(id,authToken);
-		return new ResponseEntity<List<Job>>(job1, HttpStatus.OK);
+	public ResponseEntity<List<Job>> searchByJobId(
+			@RequestParam(name = "jobID", required = false) Integer id)
+			 {
+		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id), HttpStatus.OK);
+
 	}
+	
+	
 	
 	@DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Deleting a Job by Job Id", notes = "This Rest API will delete Job by Job Id")
@@ -68,8 +86,8 @@ public class EmployeeController {
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
     @ApiOperation(value = "Updating Job by Job Id", notes = "This Rest API will update Job by Job Id")
-    public ResponseEntity<Employee> updateJob(@RequestBody Employee employee, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id) {
-		return new ResponseEntity<Employee>(employeeService.updateJob( id, employee),HttpStatus.OK);
+    public ResponseEntity<Job> updateJob(@RequestBody Job job, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id) {
+		return new ResponseEntity<Job>(jobService.updateJob( id, job),HttpStatus.OK);
 
 	}
 

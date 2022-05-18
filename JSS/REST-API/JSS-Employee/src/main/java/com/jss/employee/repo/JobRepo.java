@@ -6,5 +6,6 @@ import com.jss.employee.entity.JobEntity;
 
 
 public interface JobRepo extends JpaRepository<JobEntity, Integer>{
+	
 
 }

@@ -3,42 +3,39 @@ package com.jss.user.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@Order(2)
+public class SecurityConfigurationForJobseeker extends WebSecurityConfigurerAdapter {
 
-//@Autowired
-//PasswordEncoder passwordEncoder;
-//	@Autowired
-//	@Qualifier("JobSeekerAuthenticationManager")
-//	UserDetailsService userDetailsServiceForJobSeekerAuthenticationManager;
-	
+
 	@Autowired
-	@Qualifier("EmployeeDetailsAuthenticationManager")
-	UserDetailsService UserDetailsServiceEmployeeDetailsAuthenticationManager;
-	
+	@Qualifier("UserDetailsServiceForJobseeker")
+	UserDetailsService userDetailsServiceForJobseeker;
 	
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception { // Used for Authentication
-		//auth.userDetailsService(userDetailsServiceForJobSeekerAuthenticationManager);
-		auth.userDetailsService(UserDetailsServiceEmployeeDetailsAuthenticationManager);
+		auth.userDetailsService(userDetailsServiceForJobseeker);
+	
+	}
+	
+	@Override
+	public void configure(HttpSecurity http) throws Exception { // Used for authorization
+		http.csrf().disable().authorizeRequests().antMatchers("/jss/user/job/authenticate").permitAll().and().formLogin();
 	}
 
-	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	
 
-	@Bean
+	@Bean(name = "authenticationManagerForJobseeker")
 	public AuthenticationManager getAuthenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
@@ -49,9 +46,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 
-	@Override
-	public void configure(HttpSecurity http) throws Exception { // Used for authorization
-		http.csrf().disable().authorizeRequests().antMatchers("/user").hasAnyRole("USER", "ADMIN").antMatchers("/admin")
-				.hasRole("ADMIN").antMatchers("/jss/user/authenticate").permitAll().and().formLogin();
-	}
+	
 }
+
+
+//@EnableWebSecurity
+//@Order(1)
+//public class SecurityConfig_1 extends WebSecurityConfigurerAdapter {
+//configure(authBuilder) {
+//authBuilder.userService(UserDetailsServiceImpl_1);
+//}
+//configure(httpSecurity) {
+//("/jobseeker/login")
+//}
+//}
+//
+//
+//
+//@EnableWebSecurity
+//@Order(2)
+//public class SecurityConfig_2 extends WebSecurityConfigurerAdapter {
+//configure(authBuilder) {
+//authBuilder.userService(UserDetailsServiceImpl_2);
+//}
+//configure(httpSecurity) {
+//("/employee/login")
+//}
+//}

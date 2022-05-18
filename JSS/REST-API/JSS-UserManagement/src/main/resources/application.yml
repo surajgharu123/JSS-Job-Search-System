@@ -2,6 +2,8 @@ server:
   port: 5300
  
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:    name: USER-SERVICE
   cloud:
     config:
@@ -17,6 +19,7 @@ spring:
     properties:
       hibernate :
         dialect: org.hibernate.dialect.MySQL8Dialect
+
 eureka:
   client:
     register-with-eureka: true
@@ -24,3 +27,5 @@ eureka:
   instance:
      hostname: localhost
      instance-id: ${spring.application.name}:${random.uuid} 
+
+

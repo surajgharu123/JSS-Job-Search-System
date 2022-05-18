@@ -9,6 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
 
+
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -22,25 +29,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableEurekaClient
+
 public class JssUserManagementApplication{
-		public static void main(String[] args) {
-			SpringApplication.run(JssUserManagementApplication.class, args);
-		}
+	
+
+    public static boolean switchUserDetailsService = false;
+	public static void main(String[] args) {
+		SpringApplication.run(JssUserManagementApplication.class, args);
+	}
+	
+	@Bean
+	public ModelMapper getModelMapper() {
+		return new ModelMapper();
+	}
+	@Bean
+	public Docket getCustomizedDocket() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.select()
+				.apis(RequestHandlerSelectors.basePackage("com.jss.user"))
+				.paths(PathSelectors.any())
+				.build()
+				.apiInfo(getApiInfo());
 		
-		@Bean
-		public ModelMapper getModelMapper() {
-			return new ModelMapper();
-		}
-		@Bean
-		public Docket getCustomizedDocket() {
-			return new Docket(DocumentationType.SWAGGER_2)
-					.select()
-					.apis(RequestHandlerSelectors.basePackage("com.jss.user"))
-					.paths(PathSelectors.any())
-					.build()
-					.apiInfo(getApiInfo());
-			
-		}
+	}
 		private ApiInfo getApiInfo() {
 			ApiInfo apiInfo=new ApiInfo("Stock Rest Api Documentation",
 					"This page givesRest API Doucmentation ", "2.5",
@@ -49,6 +60,17 @@ public class JssUserManagementApplication{
 					"GPL", "http://gpl.org", 
 					new ArrayList<VendorExtension>());
 			return apiInfo;
+
 		}
 
+		
+		
+		@Bean
+		public PasswordEncoder getPasswordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+
+
 }
+
+ 

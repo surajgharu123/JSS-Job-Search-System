@@ -23,7 +23,7 @@ import com.jss.user.service.UserEmployeeService;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("EmployeeDetailsAuthenticationManager")
+@Service("UserDetailsServiceForEmployee")
 public class EmployeeDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired

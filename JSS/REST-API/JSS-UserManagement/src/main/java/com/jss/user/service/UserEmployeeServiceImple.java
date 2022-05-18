@@ -1,5 +1,7 @@
 package com.jss.user.service;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -12,7 +14,7 @@ import com.jss.user.exception.InvalidCredentialsException;
 import com.jss.user.repo.UserEmployeeRepo;
 import com.jss.user.security.JwtUtil;
 
-import org.modelmapper.ModelMapper;
+
 @Service
 public class UserEmployeeServiceImple implements UserEmployeeService {
 	
@@ -21,23 +23,23 @@ public class UserEmployeeServiceImple implements UserEmployeeService {
 	
 	@Autowired
 	UserEmployeeRepo userRepo;
-	
 	@Autowired
 	JwtUtil jwtUtil;
 	
 	@Autowired
-	AuthenticationManager authenticationManager;
-	
-//	@Autowired
-//	UserDetails userDetails;
+	@Qualifier("UserDetailsServiceForEmployee")
+	UserDetailsService UserDetailsServiceEmployee;
 	
 	@Autowired
-	UserDetailsService userDetailsService;
+	@Qualifier("AuthenticationManagerForEmployee")
+	AuthenticationManager authenticationManagerForEmployee;
+	
+	
 	
 	@Override
 	public String authenticateEmployee(UserEmployeeDTO userDTO) {
 		try {
-			this.authenticationManager.authenticate(
+			this.authenticationManagerForEmployee.authenticate(
 			new UsernamePasswordAuthenticationToken(userDTO.getUserName(), userDTO.getPassword()));
 			}
 			catch(AuthenticationException ex) {
@@ -71,14 +73,14 @@ public class UserEmployeeServiceImple implements UserEmployeeService {
 		UserEmployeeDTO user = modelMapper.map(userEntity, UserEmployeeDTO.class);
 		return user;
 	}
+
 	@Override
-	public Boolean validationAuthToken(String authToken) {
+	public Boolean validationEmployeeAuthToken(String authToken) {
 	authToken = authToken.substring(7);
 	String username = jwtUtil.extractUsername(authToken);
-	UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+	UserDetails userDetails = UserDetailsServiceEmployee.loadUserByUsername(username);
 
 	return jwtUtil.validateToken(authToken, userDetails);
 	}
-
 }
 

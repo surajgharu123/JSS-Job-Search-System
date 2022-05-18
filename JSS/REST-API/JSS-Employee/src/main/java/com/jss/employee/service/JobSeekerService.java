@@ -8,4 +8,7 @@ public interface JobSeekerService {
 	
 	public List<JobSeeker> filterAdvertise(String skillSet);
 
+
+	public List<JobSeeker> filterJobSeekerBySkills(String skillSet);
+
 }

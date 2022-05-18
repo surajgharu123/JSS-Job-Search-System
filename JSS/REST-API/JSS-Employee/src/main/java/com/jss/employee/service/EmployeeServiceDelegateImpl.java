@@ -26,7 +26,7 @@ public class EmployeeServiceDelegateImpl implements EmployeeServiceDelegate {
 	headers.set("Authorization", authToken);
 	HttpEntity entity = new HttpEntity(headers);
 	ResponseEntity<Boolean> response =
-	this.restTemplate.exchange("http://localhost:5300/jss/user/employee/authenticate", HttpMethod.POST, entity, Boolean.class);
+	this.restTemplate.exchange("http://API-GATEWAY/jss/user/employee/authenticate", HttpMethod.POST, entity, Boolean.class);
 	
 	return response.getBody();
 	}

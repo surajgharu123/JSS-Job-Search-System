@@ -19,7 +19,7 @@ import com.jss.user.repo.UserEmployeeRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("JobSeekerAuthenticationManager")
+@Service("UserDetailsServiceForJobseeker")
 public class JobSeekerDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
