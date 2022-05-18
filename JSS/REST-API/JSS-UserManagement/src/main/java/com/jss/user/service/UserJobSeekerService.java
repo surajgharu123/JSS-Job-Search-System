@@ -8,4 +8,5 @@ public interface UserJobSeekerService {
 
 	String authenticateUserJobLogin(UserJobSeekerDTO userJobDTO);
 
+	public Boolean validationAuthToken(String authToken);
 }

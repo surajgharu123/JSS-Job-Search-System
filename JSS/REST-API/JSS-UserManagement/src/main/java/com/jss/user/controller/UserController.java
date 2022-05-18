@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jss.user.JssUserManagementApplication;
 import com.jss.user.dto.UserEmployeeDTO;
 import com.jss.user.dto.UserJobSeekerDTO;
 import com.jss.user.service.UserJobSeekerService;
 import com.jss.user.service.UserEmployeeService;
 
 import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @RequestMapping("/jss/user")
@@ -37,19 +39,18 @@ public class UserController {
 		UserJobSeekerDTO userJobDto=this.userJobServices.registerUserJobSeeker(userJobDTO);
 		return new ResponseEntity<UserJobSeekerDTO>(userJobDto,HttpStatus.CREATED) ;
 	}
-	@PostMapping(value="job/authenticate",consumes = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE}
+	@PostMapping(value="/job/authenticate",consumes = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE}
 	,produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	@ApiOperation(value = "Verify authentication",notes = "This Rest API verifies login authenticaion")
-	public ResponseEntity<String>  authenticateUserJobLogin(@RequestBody UserJobSeekerDTO userJobDTO) {
-		String userJobDto=this.userJobServices.authenticateUserJobLogin(userJobDTO);
-		return new ResponseEntity<String>(userJobDto,HttpStatus.OK);
+	public ResponseEntity<String> authenticateUserJobLogin(@RequestBody UserJobSeekerDTO userJobDTO) {
+		//String userJobDto=this.userJobServices.authenticateUserJobLogin(userJobDTO);
+		
+		return new ResponseEntity<String>(userJobServices.authenticateUserJobLogin(userJobDTO),HttpStatus.OK);
 	}
 	@PostMapping(value = "/employee/authenticate",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String authenticateEmployee(@RequestBody UserEmployeeDTO login){
 		//return new ResponseEntity<String>("RP432",HttpStatus.OK);
         return userService.authenticateEmployee(login);
-
-		
 	}
 	//Register User
 	
@@ -72,6 +73,12 @@ public class UserController {
 //		return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
         return userService.createEmployee(authToken);
 
+	}
+	
+	@ApiOperation(value = "Check Validation of Auth token For Jobseeker", notes = "This Rest API helps to Check Validaty")
+	@PostMapping(value = "/auth-token/validation/jobseeker", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Boolean> validatingJobSeekerAuthToken(@RequestHeader("Auth") String authToken) {
+		return new ResponseEntity<Boolean>(userJobServices.validationAuthToken(authToken), HttpStatus.ACCEPTED);
 	}
 
 }

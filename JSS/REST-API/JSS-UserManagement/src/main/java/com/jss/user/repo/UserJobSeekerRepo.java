@@ -9,5 +9,5 @@ import com.jss.user.entity.UserJobSeekerEntity;
 public interface UserJobSeekerRepo extends JpaRepository<UserJobSeekerEntity, Integer>{
 	
 	List<UserJobSeekerEntity> findByUsername(String username);
-
+    
 }

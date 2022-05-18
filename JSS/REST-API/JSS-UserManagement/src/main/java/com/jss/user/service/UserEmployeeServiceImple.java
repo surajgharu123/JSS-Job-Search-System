@@ -1,8 +1,12 @@
 package com.jss.user.service;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import com.jss.user.dto.UserEmployeeDTO;
 import com.jss.user.entity.UserEmployeeEntity;
@@ -10,7 +14,7 @@ import com.jss.user.exception.InvalidCredentialsException;
 import com.jss.user.repo.UserEmployeeRepo;
 import com.jss.user.security.JwtUtil;
 
-import org.modelmapper.ModelMapper;
+
 @Service
 public class UserEmployeeServiceImple implements UserEmployeeService {
 	
@@ -23,6 +27,10 @@ public class UserEmployeeServiceImple implements UserEmployeeService {
 	JwtUtil jwtUtil;
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	@Qualifier("EmployeeDetailsAuthenticationManager")
+	UserDetailsService UserDetailsServiceEmployee;
 	@Override
 	public String authenticateEmployee(UserEmployeeDTO userDTO) {
 		try {
@@ -61,5 +69,13 @@ public class UserEmployeeServiceImple implements UserEmployeeService {
 		return user;
 	}
 
+	@Override
+	public Boolean validationEmployeeAuthToken(String authToken) {
+	authToken = authToken.substring(7);
+	String username = jwtUtil.extractUsername(authToken);
+	UserDetails userDetails = UserDetailsServiceEmployee.loadUserByUsername(username);
+
+	return jwtUtil.validateToken(authToken, userDetails);
+	}
 }
 

@@ -8,5 +8,5 @@ public interface UserEmployeeService {
 	public String authenticateEmployee(UserEmployeeDTO login);
 	public UserEmployeeDTO getUserRegistration( UserEmployeeDTO login);
 	public UserEmployeeDTO createEmployee(String authToken);
-
+	public Boolean validationEmployeeAuthToken(String authToken);
 }
