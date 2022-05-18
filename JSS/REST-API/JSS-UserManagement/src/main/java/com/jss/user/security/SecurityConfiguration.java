@@ -17,6 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 //@Autowired
 //PasswordEncoder passwordEncoder;
+
 	@Autowired
 	@Qualifier("JobSeekerAuthenticationManager")
 	UserDetailsService userDetailsServiceForJobSeekerAuthenticationManager;
