@@ -14,8 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableWebSecurity
 @Order(2)
 public class SecurityConfigurationForEmployee extends WebSecurityConfigurerAdapter{
-	
-	
+
+
+//@Autowired
+//PasswordEncoder passwordEncoder;
+
 	
 	@Autowired
 	@Qualifier("EmployeeDetailsAuthenticationManager")

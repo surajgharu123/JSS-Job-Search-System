@@ -48,9 +48,9 @@ public class UserController {
 		return new ResponseEntity<String>(userJobServices.authenticateUserJobLogin(userJobDTO),HttpStatus.OK);
 	}
 	@PostMapping(value = "/employee/authenticate",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String authenticateEmployee(@RequestBody UserEmployeeDTO login){
+	public ResponseEntity<String> authenticateEmployee(@RequestBody UserEmployeeDTO login){
 		//return new ResponseEntity<String>("RP432",HttpStatus.OK);
-        return userService.authenticateEmployee(login);
+        return new ResponseEntity<String> (userService.authenticateEmployee(login), HttpStatus.OK);
 	}
 	//Register User
 	
