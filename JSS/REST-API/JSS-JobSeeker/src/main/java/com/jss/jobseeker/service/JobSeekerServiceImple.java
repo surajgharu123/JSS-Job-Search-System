@@ -15,8 +15,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.jss.jobseeker.dto.JobDTO;
 import com.jss.jobseeker.entity.JobEntity;
+import com.jss.jobseeker.exception.InvalidJobSeekerException;
 import com.jss.jobseeker.exception.InvalidSearchingDataException;
 import com.jss.jobseeker.repo.JobSeekerRepo;
 
@@ -29,6 +31,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 	EntityManager entityManager;
 	@Autowired
 	ModelMapper modelMapper;
+	
 
 	@Override
 	public List<JobDTO> SearchByFilterCriteria(String companyName, String skills, String jobTitle) {
@@ -142,4 +145,29 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		}
 		throw new InvalidSearchingDataException("Id is not Found");
 	}
+	
+	
+	@Override
+	public Boolean applyForJob(JobDTO jobDto) {
+
+		Optional<JobEntity> jodDetails = jobSeekerRepo.getIdOfJob(jobDto.getJobTitle(), jobDto.getLocation(),
+				jobDto.getDescription(), jobDto.getStatus(), jobDto.getCompanyName());
+		if (jodDetails.isPresent()) {
+			Integer jobId = ConvertEntityToDTO(jodDetails.get()).getId();
+			
+			//Rest Template 
+			//Validate User 
+			/**
+			 * if(getUser(token) != null ){
+			 * }
+			 * 
+			 * 
+			 */
+		
+			return true;
+		}
+		throw new InvalidJobSeekerException("This Job details is not presnt in database");
+	}
+
+	
 }

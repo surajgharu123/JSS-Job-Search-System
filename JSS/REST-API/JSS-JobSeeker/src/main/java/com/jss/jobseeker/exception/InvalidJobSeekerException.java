@@ -1,14 +1,13 @@
 package com.jss.jobseeker.exception;
 
-public class InvalidSearchingDataException extends RuntimeException {
+public class InvalidJobSeekerException extends RuntimeException {
 	private String message;
 
-	public InvalidSearchingDataException() {
-
+	public InvalidJobSeekerException() {
 		this.message = "";
 	}
 
-	public InvalidSearchingDataException(String message) {
+	public InvalidJobSeekerException(String message) {
 
 		this.message = message;
 	}
@@ -17,5 +16,4 @@ public class InvalidSearchingDataException extends RuntimeException {
 	public String toString() {
 		return " : " + this.message;
 	}
-
 }

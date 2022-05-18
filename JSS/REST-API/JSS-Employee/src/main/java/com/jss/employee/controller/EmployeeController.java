@@ -43,10 +43,10 @@ public class EmployeeController {
 	
 	@GetMapping(value = "/search/filtercriteria", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of JobSeeker by FilterCriteria", notes = "This Rest API will return List of JobSeeker by Filter Criteria")
-	public ResponseEntity<List<JobSeeker>> searchAdvertisesByFilterCriteria(
+	public ResponseEntity<List<JobSeeker>> searchByFilterCriteria(
 			@RequestParam(name = "skillSet", required = false) String skillSet)
 			 {
-		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterAdvertise(skillSet), HttpStatus.OK);
+		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -56,6 +56,8 @@ public class EmployeeController {
 			 {
 		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id), HttpStatus.OK);
 	}
+	
+	
 	
 	@DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Deleting a Job by Job Id", notes = "This Rest API will delete Job by Job Id")

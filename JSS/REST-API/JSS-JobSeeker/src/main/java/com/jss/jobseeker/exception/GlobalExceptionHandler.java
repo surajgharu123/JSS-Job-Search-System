@@ -18,4 +18,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 				HttpStatus.CONFLICT, request);
 		return response;
 	}
+	
+	
+	@ExceptionHandler(value = InvalidJobSeekerException.class)
+	public ResponseEntity<Object> handleConflictInvalidJobSeekerException(RuntimeException exception, WebRequest request) {
+		String errorMessage = "{\"error\":" + exception.toString() + " \"}";
+		ResponseEntity<Object> response = handleExceptionInternal(exception, errorMessage, new HttpHeaders(),
+				HttpStatus.CONFLICT, request);
+		return response;
+	}
 }
