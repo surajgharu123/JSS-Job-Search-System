@@ -104,21 +104,5 @@ public String toString() {
 }
 
 
-@Override
-public boolean equals(Object obj) {
-    if (obj == this)
-        return true;
-    if (!(obj instanceof UserJobSeekerDTO))
-        return false;
-    UserJobSeekerDTO jobseeker = (UserJobSeekerDTO) obj;
-    return jobseeker.getName() == this.getName()
-            && jobseeker.getUsername() == this.getUsername()
-            && jobseeker.getPassword()== this.getPassword();
-//            && jobseeker.getAddress()== this.getAddress()
-//            && jobseeker.getContactNo()== this.getContactNo()
-//            && jobseeker.getEmail()== this.getEmail()
-//            && jobseeker.getSkillset()== this.getSkillset()
-//            && jobseeker.getRoles()== this.getRoles();
-}
 
 }
