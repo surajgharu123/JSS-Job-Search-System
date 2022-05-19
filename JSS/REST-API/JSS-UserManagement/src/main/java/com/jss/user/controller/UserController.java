@@ -88,6 +88,13 @@ public class UserController {
 	public ResponseEntity<Boolean> validatingEmployeeAuthToken(@RequestHeader("Authorization") String authToken) {
 		return new ResponseEntity<Boolean>(userService.validationEmployeeAuthToken(authToken), HttpStatus.ACCEPTED);
 	}
+	
+	
+	@ApiOperation(value = "Return Username of jobseeker", notes = "This Rest API helps to Get Username")
+	@PostMapping(value = "/jobseeker/username/", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<String> getUsername(@RequestHeader("Authorization") String authToken) {
+		return new ResponseEntity<String>(userJobServices.getUsername(authToken), HttpStatus.ACCEPTED);
+	}
 
 
 

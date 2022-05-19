@@ -47,9 +47,7 @@ public class SecurityConfigurationForEmployee extends WebSecurityConfigurerAdapt
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception { // Used for authorization
-		http.csrf().disable().authorizeRequests().antMatchers("/jss/user/").permitAll().
-		antMatchers("/jss/user/employee/authenticate").
-		permitAll().and().formLogin();
+		http.csrf().disable().authorizeRequests().antMatchers("/jss/user/employee/authenticate").permitAll().and().formLogin();
 	}
 
 }

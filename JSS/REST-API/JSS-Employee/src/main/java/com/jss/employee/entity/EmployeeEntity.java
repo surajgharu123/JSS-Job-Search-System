@@ -18,36 +18,49 @@ public class EmployeeEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@ApiModelProperty("Employee ID")
 	private int id;
-	@ApiModelProperty("Employee Name")
+
+	@ApiModelProperty("Employee Username")
 	private String userName;
-	@ApiModelProperty("Employee Pasword")
+
+	@ApiModelProperty("Employee Password")
 	private String password;
-	@ApiModelProperty("Employee Orgniztion Name")
+
+	@ApiModelProperty("Employee Orgnization Name")
 	private String orgnizationName;
+	
 	@ApiModelProperty("Employee Address")
 	private String address;
-	@ApiModelProperty("Employee ID")
+	@ApiModelProperty("Employee Job Title")
 	private String jobTitle;
 	@ApiModelProperty("Employee Location")
 	private String location;
 	@ApiModelProperty("Employee Description")
 	private String description;
+	
 	@ApiModelProperty("Employee Experience")
-	private String experience;
+	private int experience;
 	@ApiModelProperty("Employee Salary")
-	private String salary;
+	private int salary;
 	@ApiModelProperty("Employee Notice Period")
-	private String noticePeriod;
-	@ApiModelProperty("Employee ID")
-	private String contact;
+	private int noticePeriod;
+	@ApiModelProperty("Employee Contact Number")
+	private int contact;
 	@ApiModelProperty("Employee Email")
 	private String email;
 	@ApiModelProperty("Employee Status")
 	private String status;
-	public EmployeeEntity(int id, String userName, String password, String orgnizationName, String address,
-			String jobTitle, String location, String description, String experience, String salary, String noticePeriod,
-			String contact, String email, String status) {
+	@ApiModelProperty("Employee Role")
+	private String role;
+	
+
+	public EmployeeEntity() {
 		super();
+	}
+	
+	public EmployeeEntity(int id, String userName, String password, String orgnizationName, String address, String jobTitle,
+			String location, String description, int experience, int salary, int noticePeriod, int contact,
+			String email, String status, String role) {
+	
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
@@ -62,9 +75,7 @@ public class EmployeeEntity {
 		this.contact = contact;
 		this.email = email;
 		this.status = status;
-	}
-	public EmployeeEntity() {
-		super();
+		this.role = role;
 	}
 	public int getId() {
 		return id;
@@ -114,28 +125,28 @@ public class EmployeeEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getExperience() {
+	public int getExperience() {
 		return experience;
 	}
-	public void setExperience(String experience) {
+	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-	public String getSalary() {
+	public int getSalary() {
 		return salary;
 	}
-	public void setSalary(String salary) {
+	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-	public String getNoticePeriod() {
+	public int getNoticePeriod() {
 		return noticePeriod;
 	}
-	public void setNoticePeriod(String noticePeriod) {
+	public void setNoticePeriod(int noticePeriod) {
 		this.noticePeriod = noticePeriod;
 	}
-	public String getContact() {
+	public int getContact() {
 		return contact;
 	}
-	public void setContact(String contact) {
+	public void setContact(int contact) {
 		this.contact = contact;
 	}
 	public String getEmail() {
@@ -150,14 +161,22 @@ public class EmployeeEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
-		return "EmployeeEntity [id=" + id + ", userName=" + userName + ", password=" + password + ", orgnizationName="
+		return "EmployeeDTO [id=" + id + ", userName=" + userName + ", password=" + password + ", orgnizationName="
 				+ orgnizationName + ", address=" + address + ", jobTitle=" + jobTitle + ", location=" + location
 				+ ", description=" + description + ", experience=" + experience + ", salary=" + salary
 				+ ", noticePeriod=" + noticePeriod + ", contact=" + contact + ", email=" + email + ", status=" + status
-				+ "]";
+				+ ", role=" + role + "]";
 	}
+	
 	
 	
 

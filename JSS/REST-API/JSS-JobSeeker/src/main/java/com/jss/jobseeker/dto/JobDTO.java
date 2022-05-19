@@ -157,10 +157,4 @@ public class JobDTO {
 				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
 				+ companyName + "]";
 	}
-
-	
-
-
-	
-
 }

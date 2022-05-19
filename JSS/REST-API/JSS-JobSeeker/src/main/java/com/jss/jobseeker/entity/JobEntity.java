@@ -9,34 +9,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "JOB")
 public class JobEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@ApiModelProperty(value = "Job ID")
 	private int Id;
+	@ApiModelProperty(value = "Job Title")
 	private String jobTitle;
+	@ApiModelProperty(value = "Job Location")
 	private String location;
+	@ApiModelProperty(value = "Job Description")
 	private String description;
+	@ApiModelProperty(value = "Job Experience")
 	private Integer experience;
+	@ApiModelProperty(value = "Job Salary")
 	private Double salary;
+	@ApiModelProperty(value = "Notice-Period")
 	private Integer noticePeriod;
+	@ApiModelProperty(value = "Contact Email")
 	private String ContactEmail;
+	@ApiModelProperty(value = "Status")
 	private String Status;
+	@ApiModelProperty(value = "Skills")
 	private String skills;
+	@ApiModelProperty(value = "Company Name")
 	private String companyName;
+	
 	public JobEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	
-
 	
-	public JobEntity(int id, String jobTitle, String location, String description, Integer experience,
-			Double salary, Integer noticePeriod, String contactEmail, String status, String skills,
-			String companyName) {
+
+	public JobEntity(int id, String jobTitle, String location, String description, Integer experience, Double salary,
+			Integer noticePeriod, String contactEmail, String status, String skills, String companyName) {
 		super();
 		Id = id;
 		this.jobTitle = jobTitle;
@@ -58,8 +71,8 @@ public class JobEntity {
 		return Id;
 	}
 
-	public void setId(int Id) {
-		this.Id = Id;
+	public void setId(int id) {
+		this.Id = id;
 	}
 
 	public String getJobTitle() {
@@ -125,7 +138,7 @@ public class JobEntity {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	
+
 	public String getSkills() {
 		return skills;
 	}
@@ -143,6 +156,9 @@ public class JobEntity {
 		this.companyName = companyName;
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "JobEntity [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
@@ -150,5 +166,4 @@ public class JobEntity {
 				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
 				+ companyName + "]";
 	}
-
 }

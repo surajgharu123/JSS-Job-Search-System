@@ -52,8 +52,8 @@ public class JobSeekerController {
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
 	@ApiOperation(value = "Post a Job", notes = "This Rest API helps to Post a Job")
-	public ResponseEntity<JobDTO> addrecords(@RequestBody JobDTO jobSeekerDTO) {
-		return new ResponseEntity<JobDTO>(jobSeekerService.addrecords(jobSeekerDTO), HttpStatus.OK);
+	public ResponseEntity<JobDTO> addrecords(@RequestBody JobDTO jobSeekerDTO, @RequestHeader("Authorization") String authToken) {
+		return new ResponseEntity<JobDTO>(jobSeekerService.createAJob(jobSeekerDTO, authToken), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/searchLocation", produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -65,14 +65,14 @@ public class JobSeekerController {
 
 	@ApiOperation(value = "Get Specific Job detials", notes = "This Rest API helps to Get Specific Job Details")
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<JobDTO> getJobByID(@ApiParam(value = "Job", name = "Id") @PathVariable("id") int id) {
+	public ResponseEntity<JobDTO> getJobByID(@ApiParam(value = "Job", name = "Id") @PathVariable("id") int id, @RequestHeader("Authorization") String authToken) {
 		return new ResponseEntity<JobDTO>(jobSeekerService.getJobByID(id), HttpStatus.ACCEPTED);
 	}
 
 	@ApiOperation(value = "Get Specific Job detials", notes = "This Rest API helps to Get Specific Job Details")
 	@PostMapping(value = "/apply/job", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Boolean> applyForJob(@RequestBody JobDTO jobDTO) {
-		return new ResponseEntity<Boolean>(jobSeekerService.applyForJob(jobDTO), HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> applyForJob(@RequestBody JobDTO jobDTO, @RequestHeader("Authorization") String authToken) {
+		return new ResponseEntity<Boolean>(jobSeekerService.applyForJob(jobDTO,authToken), HttpStatus.ACCEPTED);
 	}
 	
 	

@@ -6,9 +6,8 @@ import com.jss.employee.dto.JobSeeker;
 
 public interface JobSeekerService {
 	
-	public List<JobSeeker> filterAdvertise(String skillSet);
 
 
-	public List<JobSeeker> filterJobSeekerBySkills(String skillSet);
+	public List<JobSeeker> filterJobSeekerBySkills(String skillSet,String authToken);
 
 }

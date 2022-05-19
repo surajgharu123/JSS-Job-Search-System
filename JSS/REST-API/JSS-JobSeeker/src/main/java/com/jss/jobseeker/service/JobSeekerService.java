@@ -14,12 +14,12 @@ public interface JobSeekerService {
 	
 	public List<JobDTO> getAllRecords();
 	
-	public JobDTO addrecords(JobDTO jobDTO);
+	public JobDTO createAJob(JobDTO jobDTO, String authToken);
 	public List<JobDTO> searchByLocation(String location);
 	
 	public JobDTO getJobByID(int id);
 	
-	public Boolean applyForJob(JobDTO jobDto);
+	public Boolean applyForJob(JobDTO jobDto, String authToken);
 	
 	
 

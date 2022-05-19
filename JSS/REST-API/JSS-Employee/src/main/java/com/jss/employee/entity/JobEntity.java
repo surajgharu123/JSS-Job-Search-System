@@ -14,104 +14,154 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="JOB DTO")
 public class JobEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@ApiModelProperty("Job ID")
-	private Integer id;
-	@ApiModelProperty("Job Title")
-	private String job_title;
-	@ApiModelProperty("Job Location")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@ApiModelProperty(value = "Job ID")
+	private int Id;
+	@ApiModelProperty(value = "Job Title")
+	private String jobTitle;
+	@ApiModelProperty(value = "Job Location")
 	private String location;
-	@ApiModelProperty("Job Description")
+	@ApiModelProperty(value = "Job Description")
 	private String description;
-	@ApiModelProperty("Job Experience")
-	private int experience;
-	@ApiModelProperty("Job Salary")
-	private double salary;
-	@ApiModelProperty("Job Notice Period")
-	private int notice;
-	@ApiModelProperty("Contact Number")
-	private long contact_no;
-	@ApiModelProperty("Job Status")
-	private String status;
+	@ApiModelProperty(value = "Job Experience")
+	private Integer experience;
+	@ApiModelProperty(value = "Job Salary")
+	private Double salary;
+	@ApiModelProperty(value = "Notice-Period")
+	private Integer noticePeriod;
+	@ApiModelProperty(value = "Contact Email")
+	private String ContactEmail;
+	@ApiModelProperty(value = "Status")
+	private String Status;
+	@ApiModelProperty(value = "Skills")
+	private String skills;
+	@ApiModelProperty(value = "Company Name")
+	private String companyName;
+	public JobEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
-	public Integer getId() {
-		return id;
+
+	
+	public JobEntity(int id, String jobTitle, String location, String description, Integer experience,
+			Double salary, Integer noticePeriod, String contactEmail, String status, String skills,
+			String companyName) {
+		super();
+		Id = id;
+		this.jobTitle = jobTitle;
+		this.location = location;
+		this.description = description;
+		this.experience = experience;
+		this.salary = salary;
+		this.noticePeriod = noticePeriod;
+		ContactEmail = contactEmail;
+		Status = status;
+		this.skills = skills;
+		this.companyName = companyName;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+
+
+
+	public int getId() {
+		return Id;
 	}
-	public String getJob_title() {
-		return job_title;
+
+	public void setId(int Id) {
+		this.Id = Id;
 	}
-	public void setJob_title(String job_title) {
-		this.job_title = job_title;
+
+	public String getJobTitle() {
+		return jobTitle;
 	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getExperience() {
+
+	public Integer getExperience() {
 		return experience;
 	}
-	public void setExperience(int experience) {
+
+	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
-	public double getSalary() {
+
+	public Double getSalary() {
 		return salary;
 	}
-	public void setSalary(double salary) {
+
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-	public int getNotice() {
-		return notice;
+
+	public Integer getNoticePeriod() {
+		return noticePeriod;
 	}
-	public void setNotice(int notice) {
-		this.notice = notice;
+
+	public void setNoticePeriod(Integer noticePeriod) {
+		this.noticePeriod = noticePeriod;
 	}
-	
-	public long getContact_no() {
-		return contact_no;
+
+	public String getContactEmail() {
+		return ContactEmail;
 	}
-	public void setContact_no(long contact_no) {
-		this.contact_no = contact_no;
+
+	public void setContactEmail(String contactEmail) {
+		ContactEmail = contactEmail;
 	}
+
 	public String getStatus() {
-		return status;
+		return Status;
 	}
+
 	public void setStatus(String status) {
-		this.status = status;
-	}
-	public JobEntity() {
-		
+		Status = status;
 	}
 	
-	public JobEntity(Integer id, String job_title, String location, String description, int experience, double salary,
-			int notice, long contact_no, String status) {
-	
-		this.id = id;
-		this.job_title = job_title;
-		this.location = location;
-		this.description = description;
-		this.experience = experience;
-		this.salary = salary;
-		this.notice = notice;
-		this.contact_no = contact_no;
-		this.status = status;
+	public String getSkills() {
+		return skills;
 	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	@Override
 	public String toString() {
-		return "JobEntity [id=" + id + ", job_title=" + job_title + ", location=" + location + ", description="
-				+ description + ", experience=" + experience + ", salary=" + salary + ", notice=" + notice
-				+ ", contact_no=" + contact_no + ", status=" + status + "]";
+		return "JobEntity [Id=" + Id + ", jobTitle=" + jobTitle + ", location=" + location + ", description="
+				+ description + ", experience=" + experience + ", salary=" + salary + ", noticePeriod=" + noticePeriod
+				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
+				+ companyName + "]";
 	}
+
 
 	
 

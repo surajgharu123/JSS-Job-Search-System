@@ -21,6 +21,7 @@ public class UserEmployeeDTO {
 	
 
 	public UserEmployeeDTO() {
+		super();
 	}
 	
 	public UserEmployeeDTO(int id, String userName, String password, String orgnizationName, String address, String jobTitle,

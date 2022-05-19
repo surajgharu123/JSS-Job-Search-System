@@ -15,94 +15,95 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.jss.jobseeker.dto.JobDTO;
 import com.jss.jobseeker.entity.JobEntity;
-
+import com.jss.jobseeker.entity.JobSeekerEntity;
+import com.jss.jobseeker.exception.InvalidAuthTokenException;
 import com.jss.jobseeker.exception.InvalidJobSeekerException;
 import com.jss.jobseeker.exception.InvalidSearchingDataException;
+import com.jss.jobseeker.repo.JobRepo;
 import com.jss.jobseeker.repo.JobSeekerRepo;
 
 @Service
 public class JobSeekerServiceImple implements JobSeekerService {
-	
+
 	@Autowired
-	JobSeekerRepo jobSeekerRepo;
+	JobRepo jobSeeker;
+	
+	@Autowired 
+	JobSeekerRepo jobSeerkRepo;
 	@Autowired
 	EntityManager entityManager;
 	@Autowired
 	ModelMapper modelMapper;
-	
+
+	@Autowired
+	UserManagementDelegate userManagementDelegate;
 
 	@Override
 	public List<JobDTO> SearchByFilterCriteria(String companyName, String skills, String jobTitle) {
 		// TODO Auto-generated method stub
-		
+
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<JobEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobEntity.class);
 		Root<JobEntity> rootDTO = criteriaQueryEntity.from(JobEntity.class);
-		
-		
+
 		//
 		Predicate companyNamePredicate = criteriaBuilder.and();
 		Predicate skillsPredicate = criteriaBuilder.and();
 		Predicate designationPredicate = criteriaBuilder.and();
 		Predicate finalPredicate = criteriaBuilder.and();
-		
-		if(companyName != null && !"".equalsIgnoreCase(companyName)) {
+
+		if (companyName != null && !"".equalsIgnoreCase(companyName)) {
 			companyNamePredicate = criteriaBuilder.like(rootDTO.get("companyName"), "%" + companyName + "%");
 		}
-		if(skills != null && !"".equalsIgnoreCase(skills)) {
+		if (skills != null && !"".equalsIgnoreCase(skills)) {
 			skillsPredicate = criteriaBuilder.like(rootDTO.get("skills"), "%" + skills + "%");
 		}
-		if(jobTitle != null && !"".equalsIgnoreCase(jobTitle)) {
-			designationPredicate = criteriaBuilder.like(rootDTO.get("jobTitle"), "%" + jobTitle +"%");
+		if (jobTitle != null && !"".equalsIgnoreCase(jobTitle)) {
+			designationPredicate = criteriaBuilder.like(rootDTO.get("jobTitle"), "%" + jobTitle + "%");
 		}
-		
+
 		finalPredicate = criteriaBuilder.and(companyNamePredicate, skillsPredicate, designationPredicate);
-		
+
 		criteriaQueryEntity.where(finalPredicate);
-		
+
 		TypedQuery<JobEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
 		List<JobEntity> jobEntities = typedQuery.getResultList();
 		List<JobDTO> jobDTOs = new ArrayList<>();
-		for(JobEntity jobEntity : jobEntities) {
+		for (JobEntity jobEntity : jobEntities) {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
-		
-		if(jobDTOs.isEmpty()) {
+
+		if (jobDTOs.isEmpty()) {
 			throw new InvalidSearchingDataException("Seaching Data is not Found");
 		}
-		
+
 		return jobDTOs;
 	}
+
 	
-	public JobEntity ConvertDTOToEntity(JobDTO jobSeekerDTO) {
-		
-		return modelMapper.map(jobSeekerDTO, JobEntity.class);
-	}
-
-	public JobDTO ConvertEntityToDTO(JobEntity jobSeekerEntity) {
-		return modelMapper.map(jobSeekerEntity, JobDTO.class);
-	}
-
 	@Override
 	public List<JobDTO> getAllRecords() {
 		// TODO Auto-generated method stub
-		List<JobEntity> jobEntities = jobSeekerRepo.findAll();
+		List<JobEntity> jobEntities = jobSeeker.findAll();
 		List<JobDTO> jobDTOs = new ArrayList<>();
-		for(JobEntity jobEntity : jobEntities) {
+		for (JobEntity jobEntity : jobEntities) {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
 		return jobDTOs;
 	}
 
 	@Override
-	public JobDTO addrecords(JobDTO jobSeekerDTO) {
-		
+	public JobDTO createAJob(JobDTO jobSeekerDTO, String authToken) {
+
 		// TODO Auto-generated method stub
-		JobEntity jobSeekerEntity = jobSeekerRepo.save(ConvertDTOToEntity(jobSeekerDTO));
-		return ConvertEntityToDTO(jobSeekerEntity);
+		if (userManagementDelegate.isTokenValidForEmployee(authToken)) {
+			JobEntity jobSeekerEntity = jobSeeker.save(ConvertDTOToEntity(jobSeekerDTO));
+
+			return ConvertEntityToDTO(jobSeekerEntity);
+		} else
+			throw new InvalidAuthTokenException();
 	}
 
 	@Override
@@ -111,66 +112,70 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<JobEntity> criteriaQueryEntity = criteriaBuilder.createQuery(JobEntity.class);
 		Root<JobEntity> rootDTO = criteriaQueryEntity.from(JobEntity.class);
-		
+
 		Predicate locationPredicate = criteriaBuilder.and();
-		
-		if(location != null && !"".equalsIgnoreCase(location)) {
+
+		if (location != null && !"".equalsIgnoreCase(location)) {
 			locationPredicate = criteriaBuilder.like(rootDTO.get("location"), "%" + location + "%");
 		}
-		
-        criteriaQueryEntity.where(locationPredicate);
-		
+
+		criteriaQueryEntity.where(locationPredicate);
+
 		TypedQuery<JobEntity> typedQuery = entityManager.createQuery(criteriaQueryEntity);
 		List<JobEntity> jobEntities = typedQuery.getResultList();
 		List<JobDTO> jobDTOs = new ArrayList<>();
-		for(JobEntity jobEntity : jobEntities) {
+		for (JobEntity jobEntity : jobEntities) {
 			jobDTOs.add(ConvertEntityToDTO(jobEntity));
 		}
-		
-		if(jobDTOs.isEmpty()) {
+
+		if (jobDTOs.isEmpty()) {
 			throw new InvalidSearchingDataException("Entered Location is not Found");
 		}
-		
+
 		return jobDTOs;
 	}
 
 	@Override
 	public JobDTO getJobByID(int id) {
 
-		
-		Optional<JobEntity> jobEntity = jobSeekerRepo.findById(id);
-		if(jobEntity.isPresent())
-		{
+		Optional<JobEntity> jobEntity = jobSeeker.findById(id);
+		if (jobEntity.isPresent()) {
 			return ConvertEntityToDTO(jobEntity.get());
-			
+
 		}
 		throw new InvalidSearchingDataException("Id is not Found");
 
 	}
-	
-	
+
 	@Override
-	public Boolean applyForJob(JobDTO jobDto) {
+	public Boolean applyForJob(JobDTO jobDto, String authToken) {
 
-		Optional<JobEntity> jodDetails = jobSeekerRepo.getIdOfJob(jobDto.getJobTitle(), jobDto.getLocation(),
-				jobDto.getDescription(), jobDto.getStatus(), jobDto.getCompanyName());
-		if (jodDetails.isPresent()) {
-			Integer jobId = ConvertEntityToDTO(jodDetails.get()).getId();
-			
-			//Rest Template 
-			//Validate User 
-			/**
-			 * if(getUser(token) != null ){
-			 * }
-			 * 
-			 * 
-			 */
-		
-			return true;
+		if (userManagementDelegate.isTokenValidForJobseeker(authToken)) {
+			Optional<JobEntity> jodDetails = jobSeeker.getIdOfJob(jobDto.getJobTitle(), jobDto.getLocation(),
+					jobDto.getDescription(), jobDto.getStatus(), jobDto.getCompanyName());
+			if (jodDetails.isPresent()) {
+				Integer jobId = ConvertEntityToDTO(jodDetails.get()).getId();
+				String username = userManagementDelegate.getUserName(authToken);
+				if(username != null) {
+					JobSeekerEntity jobSeekerEntity = jobSeerkRepo.findByUsername(username);
+					jobSeekerEntity.setJobID(jobId);
+					jobSeerkRepo.save(jobSeekerEntity);
+				}
+				return true;
+			}
+			throw new InvalidJobSeekerException("This Job details is not presnt in database");
 		}
-		throw new InvalidJobSeekerException("This Job details is not presnt in database");
+		throw new InvalidAuthTokenException();
+	}
+	
+	public JobEntity ConvertDTOToEntity(JobDTO jobDTO) {
 
+		return modelMapper.map(jobDTO, JobEntity.class);
 	}
 
-	
+	public JobDTO ConvertEntityToDTO(JobEntity jobEntity) {
+		return modelMapper.map(jobEntity, JobDTO.class);
+	}
+
+
 }

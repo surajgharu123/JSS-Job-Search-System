@@ -101,4 +101,13 @@ public class UserJobSeekerServiceImpl implements UserJobSeekerService {
 		return jwtUtil.validateToken(authToken, userDetails);
 	}
 
+	@Override
+	public String getUsername(String authToken) {
+		// TODO Auto-generated method stub
+		authToken = authToken.substring(7);
+		String username = jwtUtil.extractUsername(authToken);
+		
+		return username;
+	}
+
 }

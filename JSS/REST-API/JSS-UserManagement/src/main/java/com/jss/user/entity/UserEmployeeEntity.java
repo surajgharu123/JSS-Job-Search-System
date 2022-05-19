@@ -31,7 +31,7 @@ public class UserEmployeeEntity {
 	private String role;
 
 	public UserEmployeeEntity() {
-
+		super();
 	}
 
 	public UserEmployeeEntity(int id, String userName, String password, String orgnizationName, String address,

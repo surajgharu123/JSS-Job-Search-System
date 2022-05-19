@@ -46,9 +46,9 @@ public class EmployeeController {
 	@GetMapping(value = "/search/filtercriteria", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of JobSeeker by FilterCriteria", notes = "This Rest API will return List of JobSeeker by Filter Criteria")
 	public ResponseEntity<List<JobSeeker>> searchByFilterCriteria(
-			@RequestParam(name = "skillSet", required = false) String skillSet)
+			@RequestParam(name = "skillSet", required = false) String skillSet, @RequestHeader("Authorization") String authToken)
 			 {
-		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet), HttpStatus.OK);
+		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet,authToken), HttpStatus.OK);
 	}
 	
 //	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -68,10 +68,9 @@ public class EmployeeController {
 	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of Jobs by Job Id", notes = "This Rest API will return List of Jobs by Job Id")
 	public ResponseEntity<List<Job>> searchByJobId(
-			@RequestParam(name = "jobID", required = false) Integer id,
-			@RequestHeader("Authorization") String authToken)
+			@RequestParam(name = "jobID", required = false) Integer id, @RequestHeader("Authorization") String authToken)
 			 {
-		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id,authToken), HttpStatus.OK);
+		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id, authToken), HttpStatus.OK);
 
 	}
 	
@@ -79,16 +78,16 @@ public class EmployeeController {
 	
 	@DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Deleting a Job by Job Id", notes = "This Rest API will delete Job by Job Id")
-	public ResponseEntity<Boolean> deleteJobById(@ApiParam(value="JobID", name="Deleting Job") @PathVariable("id") int id) {
-		return new ResponseEntity<Boolean> (jobService.deleteJobById(id),HttpStatus.OK);
+	public ResponseEntity<Boolean> deleteJobById(@ApiParam(value="JobID", name="Deleting Job") @PathVariable("id") int id, @RequestHeader("Authorization") String authToken ) {
+		return new ResponseEntity<Boolean> (jobService.deleteJobById(id,authToken),HttpStatus.OK);
 	}
 	
     @PutMapping(value = "/update/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
     @ApiOperation(value = "Updating Job by Job Id", notes = "This Rest API will update Job by Job Id")
-    public ResponseEntity<Job> updateJob(@RequestBody Job job, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id) {
-		return new ResponseEntity<Job>(jobService.updateJob( id, job),HttpStatus.OK);
+    public ResponseEntity<Job> updateJob(@RequestBody Job job, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id, @RequestHeader("Authorization") String authToken) {
+		return new ResponseEntity<Job>(jobService.updateJob( id,authToken, job),HttpStatus.OK);
 
 	}
 

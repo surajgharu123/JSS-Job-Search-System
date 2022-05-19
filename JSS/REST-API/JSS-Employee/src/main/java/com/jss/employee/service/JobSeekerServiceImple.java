@@ -21,6 +21,7 @@ import com.jss.employee.dto.*;
 import com.jss.employee.entity.JobEntity;
 import com.jss.employee.entity.JobSeekerEntity;
 import com.jss.employee.exception.DataNotFoundException;
+import com.jss.employee.exception.InvalidAuthTokenException;
 import com.jss.employee.repo.JobSeekerRepo;
 
 @Service
@@ -33,56 +34,43 @@ public class JobSeekerServiceImple implements JobSeekerService {
 	@Autowired
 	JobSeekerRepo jobSeekerRepo;
 
-	
-	
+	@Autowired
+	EmployeeServiceDelegate employeeServiceDelegate;
+
 //	@Override
 //	public List<JobSeeker> filterAdvertise(String skillSet) {
 //		
 	@Override
-	public List<JobSeeker> filterJobSeekerBySkills(String skillSet) {
-
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<JobSeekerEntity> criteriaQuery = criteriaBuilder.createQuery(JobSeekerEntity.class);
-		Root<JobSeekerEntity> root = criteriaQuery.from(JobSeekerEntity.class);
-
-		Predicate predicateSkillSet = criteriaBuilder.and();
-		if (skillSet != null && !"".equalsIgnoreCase(skillSet)) {
-			predicateSkillSet = criteriaBuilder.like(root.get("skillset"), "%" + skillSet + "%");
-		
-		criteriaQuery.where(predicateSkillSet);
-	
-		TypedQuery<JobSeekerEntity> typedQuery = entityManager.createQuery(criteriaQuery);
-
-		List<JobSeekerEntity> jobSeekerEntityList = typedQuery.getResultList();
-		
-		List<JobSeeker> jobSeekerDTOs = new ArrayList<>();
-		for(JobSeekerEntity jobseeker : jobSeekerEntityList) {
-		jobSeekerDTOs.add(convertEntityIntoDTO(jobseeker));
-		}
-
-		if(jobSeekerDTOs.isEmpty())
-		{
-			throw new DataNotFoundException();
-		}
-		return jobSeekerDTOs;
-		
-		
-	}
-	
-		criteriaQuery.where(predicateSkillSet);
-
-		TypedQuery<JobSeekerEntity> typedQuery = entityManager.createQuery(criteriaQuery);
-
-		List<JobSeekerEntity> jobSeekerEntityList = typedQuery.getResultList();
+	public List<JobSeeker> filterJobSeekerBySkills(String skillSet, String authToken) {
 
 		List<JobSeeker> jobSeekerDTOs = new ArrayList<>();
-		for (JobSeekerEntity jobseeker : jobSeekerEntityList) {
-			jobSeekerDTOs.add(convertEntityIntoDTO(jobseeker));
-		}
+		if (employeeServiceDelegate.isTokenValid(authToken)) {
+			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<JobSeekerEntity> criteriaQuery = criteriaBuilder.createQuery(JobSeekerEntity.class);
+			Root<JobSeekerEntity> root = criteriaQuery.from(JobSeekerEntity.class);
 
-		if (jobSeekerDTOs.isEmpty()) {
-			throw new DataNotFoundException();
-		}
+			Predicate predicateSkillSet = criteriaBuilder.and();
+			if (skillSet != null && !"".equalsIgnoreCase(skillSet)) {
+				predicateSkillSet = criteriaBuilder.like(root.get("skillset"), "%" + skillSet + "%");
+
+				criteriaQuery.where(predicateSkillSet);
+
+				TypedQuery<JobSeekerEntity> typedQuery = entityManager.createQuery(criteriaQuery);
+
+				List<JobSeekerEntity> jobSeekerEntityList = typedQuery.getResultList();
+
+				for (JobSeekerEntity jobseeker : jobSeekerEntityList) {
+					jobSeekerDTOs.add(convertEntityIntoDTO(jobseeker));
+				}
+
+				if (jobSeekerDTOs.isEmpty()) {
+					throw new DataNotFoundException();
+				}
+
+			}
+
+		} else
+			throw new InvalidAuthTokenException();
 		return jobSeekerDTOs;
 
 	}
@@ -92,10 +80,5 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		return jobSeeker;
 	}
 
-	@Override
-	public List<JobSeeker> filterAdvertise(String skillSet) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
