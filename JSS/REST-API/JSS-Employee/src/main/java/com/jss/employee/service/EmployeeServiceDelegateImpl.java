@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.micrometer.core.ipc.http.HttpSender.Response;
 
-@Service
+@Service("employeeServiceDelegate")
 public class EmployeeServiceDelegateImpl implements EmployeeServiceDelegate {
 	
 	@Autowired

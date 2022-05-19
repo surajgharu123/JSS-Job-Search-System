@@ -157,4 +157,12 @@ public class JobDTO {
 				+ ", ContactEmail=" + ContactEmail + ", Status=" + Status + ", skills=" + skills + ", companyName="
 				+ companyName + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		JobDTO jobDto = (JobDTO) obj;
+		if (this.jobTitle.equals(jobDto.getJobTitle()))
+			return true;
+		return false;
+	}
 }

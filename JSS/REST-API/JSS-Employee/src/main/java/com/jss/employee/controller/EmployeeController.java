@@ -3,6 +3,7 @@ package com.jss.employee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,8 +83,7 @@ public class EmployeeController {
 		return new ResponseEntity<Boolean> (jobService.deleteJobById(id,authToken),HttpStatus.OK);
 	}
 	
-    @PutMapping(value = "/update/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = "/update/{id}",  produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
     @ApiOperation(value = "Updating Job by Job Id", notes = "This Rest API will update Job by Job Id")
     public ResponseEntity<Job> updateJob(@RequestBody Job job, @ApiParam(value="JobID", name="For Updating a Job")@PathVariable("id") int id, @RequestHeader("Authorization") String authToken) {

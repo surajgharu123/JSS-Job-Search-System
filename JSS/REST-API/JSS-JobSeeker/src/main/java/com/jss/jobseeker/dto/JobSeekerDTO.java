@@ -131,5 +131,14 @@ public class JobSeekerDTO {
 				+ ", address=" + address + ", contactNo=" + contactNo + ", email=" + email + ", skillset=" + skillset
 				+ ", roles=" + roles + ", jobID=" + jobID + "]";
 	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		JobSeekerDTO jobSeekerDto = (JobSeekerDTO) obj;
+		if (this.address.equals(jobSeekerDto.getAddress()))
+			return true;
+		return false;
+	}
 
 }

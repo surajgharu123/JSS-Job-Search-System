@@ -17,7 +17,7 @@ public interface JobSeekerService {
 	public JobDTO createAJob(JobDTO jobDTO, String authToken);
 	public List<JobDTO> searchByLocation(String location);
 	
-	public JobDTO getJobByID(int id);
+	public JobDTO getJobByID(int id,String authToken);
 	
 	public Boolean applyForJob(JobDTO jobDto, String authToken);
 	

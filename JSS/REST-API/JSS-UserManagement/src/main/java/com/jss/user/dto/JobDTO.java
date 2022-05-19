@@ -2,6 +2,8 @@ package com.jss.user.dto;
 
 import java.util.List;
 
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -158,7 +160,13 @@ public class JobDTO {
 				+ companyName + "]";
 	}
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		JobDTO jobDto = (JobDTO) obj;
+		if (this.jobTitle.equals(jobDto.getJobTitle()))
+			return true;
+		return false;
+	}
 
 
 	

@@ -59,6 +59,7 @@ public class JssJobSeekerApplication {
 	} 
 	
 	@Bean
+	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}

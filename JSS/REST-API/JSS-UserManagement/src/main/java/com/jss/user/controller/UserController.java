@@ -45,8 +45,8 @@ public class UserController {
 	,produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	@ApiOperation(value = "Verify authentication",notes = "This Rest API verifies login authenticaion")
 	public ResponseEntity<String>  authenticateUserJobLogin(@RequestBody UserJobSeekerDTO userJobDTO) {
-		String userJobDto=this.userJobServices.authenticateUserJobLogin(userJobDTO);
-		return new ResponseEntity<String>(userJobDto,HttpStatus.OK);
+		
+		return new ResponseEntity<String>(this.userJobServices.authenticateUserJobLogin(userJobDTO),HttpStatus.OK);
 	}
 	@PostMapping(value = "/employee/authenticate",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> authenticateEmployee(@RequestBody UserEmployeeDTO login){

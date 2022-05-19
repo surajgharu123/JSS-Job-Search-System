@@ -24,6 +24,8 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -36,10 +38,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		<groupId>io.springfox</groupId>
-		<artifactId>springfox-boot-starter</artifactId>
-		<version>3.0.0</version>
-</dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -49,44 +51,57 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
-	
-   <dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-actuator</artifactId>
-</dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    
-    <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.28</version>
-	</dependency>
-    <dependency>
-		<groupId>org.modelmapper</groupId>
-		<artifactId>modelmapper</artifactId>
-		<version>2.4.4</version>
-</dependency>
-<dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.4.4</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-<dependency>
-<groupId>org.springframework.cloud</groupId>
-<artifactId>spring-cloud-sleuth-zipkin</artifactId>
-</dependency>
-<dependency>
-<groupId>org.springframework.cloud</groupId>
-<artifactId>spring-cloud-starter-sleuth</artifactId>
-</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
@@ -96,6 +111,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 
 	<dependencyManagement>
 		<dependencies>
@@ -109,4 +126,3 @@
 		</dependencies>
 	</dependencyManagement>
 </project>
-

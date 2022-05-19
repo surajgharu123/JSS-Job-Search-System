@@ -1,5 +1,7 @@
 package com.jss.employee.dto;
 
+
+
 import io.swagger.annotations.ApiModelProperty;
 
 public class JobSeeker {
@@ -130,5 +132,12 @@ public class JobSeeker {
 		return "UserJobSeekerDTO [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password
 				+ ", address=" + address + ", contactNo=" + contactNo + ", email=" + email + ", skillset=" + skillset
 				+ ", roles=" + roles + ", jobID=" + jobID + "]";
+	}
+	@Override
+	public boolean equals(Object obj) {
+		JobSeeker jobSeekerDto = (JobSeeker) obj;
+		if (this.address.equals(jobSeekerDto.getAddress()))
+			return true;
+		return false;
 	}
 }

@@ -20,4 +20,45 @@ eureka:
     fetch-registry: true
   instance:
      hostname: localhost
-     instance-id: ${spring.application.name}:${random.uuid} 
+     instance-id: ${spring.application.name}:${random.uuid}
+resilience4j:
+  circuitbreaker:
+    instances:
+       AUTH_TOKEN_VALIDATION_FOR_EMPLOYEE:
+          register-health-indicator: true
+          automatic-transition-from-open-to-half-open-enabled: true
+          failure-rate-threshold: 50
+          minimum-number-of-calls: 5
+          permitted-number-of-calls-in-half-open-state: 3
+          wait-duration-in-open-state: 5s
+          
+       AUTH_TOKEN_VALIDATION_FOR_JOBSEEKER:
+          register-health-indicator: true
+          automatic-transition-from-open-to-half-open-enabled: true
+          failure-rate-threshold: 50
+          minimum-number-of-calls: 5
+          permitted-number-of-calls-in-half-open-state: 3
+          wait-duration-in-open-state: 5s
+          
+          
+       GET_DATA_FROM_DIFFERENT_TABELS:
+          register-health-indicator: true
+          automatic-transition-from-open-to-half-open-enabled: true
+          failure-rate-threshold: 50
+          minimum-number-of-calls: 5
+          permitted-number-of-calls-in-half-open-state: 3
+          wait-duration-in-open-state: 5s
+          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /jss-jobseeker-monitor 
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always 
+   

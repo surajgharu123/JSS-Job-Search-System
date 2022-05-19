@@ -150,6 +150,12 @@ public class UserEmployeeDTO {
 //		this.password = password;
 //	}
 //	
-	
+	@Override
+	public boolean equals(Object obj) {
+		UserEmployeeDTO jobSeekerDto = (UserEmployeeDTO) obj;
+		if (this.userName.equals(jobSeekerDto.getUserName()))
+			return true;
+		return false;
+	}
 	
 }

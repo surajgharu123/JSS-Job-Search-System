@@ -1,5 +1,7 @@
 package com.jss.user.dto;
 
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -132,6 +134,14 @@ public class UserJobSeekerDTO {
 		return "UserJobSeekerDTO [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password
 				+ ", address=" + address + ", contactNo=" + contactNo + ", email=" + email + ", skillset=" + skillset
 				+ ", roles=" + roles + ", jobID=" + jobID + "]";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		UserJobSeekerDTO jobSeekerDto = (UserJobSeekerDTO) obj;
+		if (this.username.equals(jobSeekerDto.getUsername()))
+			return true;
+		return false;
 	}
 	
 }

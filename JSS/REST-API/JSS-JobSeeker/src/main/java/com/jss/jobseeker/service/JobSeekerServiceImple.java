@@ -13,7 +13,13 @@ import javax.persistence.criteria.Root;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.jss.jobseeker.dto.JobDTO;
 import com.jss.jobseeker.entity.JobEntity;
@@ -29,8 +35,8 @@ public class JobSeekerServiceImple implements JobSeekerService {
 
 	@Autowired
 	JobRepo jobSeeker;
-	
-	@Autowired 
+
+	@Autowired
 	JobSeekerRepo jobSeerkRepo;
 	@Autowired
 	EntityManager entityManager;
@@ -39,6 +45,9 @@ public class JobSeekerServiceImple implements JobSeekerService {
 
 	@Autowired
 	UserManagementDelegate userManagementDelegate;
+	
+	@Autowired
+	RestTemplate restTemplate;
 
 	@Override
 	public List<JobDTO> SearchByFilterCriteria(String companyName, String skills, String jobTitle) {
@@ -82,7 +91,6 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		return jobDTOs;
 	}
 
-	
 	@Override
 	public List<JobDTO> getAllRecords() {
 		// TODO Auto-generated method stub
@@ -135,17 +143,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		return jobDTOs;
 	}
 
-	@Override
-	public JobDTO getJobByID(int id) {
 
-		Optional<JobEntity> jobEntity = jobSeeker.findById(id);
-		if (jobEntity.isPresent()) {
-			return ConvertEntityToDTO(jobEntity.get());
-
-		}
-		throw new InvalidSearchingDataException("Id is not Found");
-
-	}
 
 	@Override
 	public Boolean applyForJob(JobDTO jobDto, String authToken) {
@@ -156,7 +154,8 @@ public class JobSeekerServiceImple implements JobSeekerService {
 			if (jodDetails.isPresent()) {
 				Integer jobId = ConvertEntityToDTO(jodDetails.get()).getId();
 				String username = userManagementDelegate.getUserName(authToken);
-				if(username != null) {
+				
+				if (username != null) {
 					JobSeekerEntity jobSeekerEntity = jobSeerkRepo.findByUsername(username);
 					jobSeekerEntity.setJobID(jobId);
 					jobSeerkRepo.save(jobSeekerEntity);
@@ -167,7 +166,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		}
 		throw new InvalidAuthTokenException();
 	}
-	
+
 	public JobEntity ConvertDTOToEntity(JobDTO jobDTO) {
 
 		return modelMapper.map(jobDTO, JobEntity.class);
@@ -177,5 +176,20 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		return modelMapper.map(jobEntity, JobDTO.class);
 	}
 
+	@Override
+	public JobDTO getJobByID(int id, String authToken) {
+		// TODO Auto-generated method stub
+		if (userManagementDelegate.isTokenValidForEmployee(authToken)) {
+		Optional<JobEntity> jobEntity = jobSeeker.findById(id);
+		if (jobEntity.isPresent()) {
+			return ConvertEntityToDTO(jobEntity.get());
+
+		}
+		throw new InvalidSearchingDataException("Id is not Found");
+
+	}
+	throw new InvalidAuthTokenException("Invalid Auth-Token");
+		
+	}
 
 }
