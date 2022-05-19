@@ -10,8 +10,8 @@ public interface JobService {
 
 	//List<Job> searchByJobId(Integer id,String authToken);
 
-	List<Job> searchByJobId(Integer id);
+	public List<Job> searchByJobId(Integer i,String authTokend);
 	public Boolean deleteJobById(int id);
-	Job updateJob(int id, Job job);
+	public Job updateJob(int id, Job job);
 	
 }

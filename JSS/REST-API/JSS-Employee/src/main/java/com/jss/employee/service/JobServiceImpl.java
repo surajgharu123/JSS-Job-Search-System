@@ -94,37 +94,30 @@ public class JobServiceImpl implements JobService{
 
 
 	@Override
-	public List<Job> searchByJobId(Integer id) {
+	public List<Job> searchByJobId(Integer id,String authToken) {
+		List<Job> jobDTOs = new ArrayList<>();
+		if (employeeServiceDelegate.isTokenValid(authToken)) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<JobEntity> criteriaQuery = criteriaBuilder.createQuery(JobEntity.class);
 		Root<JobEntity> root = criteriaQuery.from(JobEntity.class);
-
 		Predicate predicateId = criteriaBuilder.and();
-		
-
 		if (id != null) {
-			predicateId = criteriaBuilder.equal(root.get("id"), id);
+		predicateId = criteriaBuilder.equal(root.get("id"), id);
 		}
-
-		//root.get("id"), "%" + id + "%"
+		// root.get("id"), "%" + id + "%"
 		criteriaQuery.where(predicateId);
-	
 		TypedQuery<JobEntity> typedQuery = entityManager.createQuery(criteriaQuery);
-
 		List<JobEntity> jobEntityList = typedQuery.getResultList();
-		
-		List<Job> jobDTOs = new ArrayList<>();
-		for(JobEntity job : jobEntityList) {
+		for (JobEntity job : jobEntityList) {
 		jobDTOs.add(convertEntityIntoDTO(job));
 		}
-
-		if(jobDTOs.isEmpty())
-		{
-			throw new InvalidIdException("Entered Search Id not Avaiable");
+		if (jobDTOs.isEmpty()) {
+		throw new InvalidIdException("Entered Search Id not Avaiable");
+		}
 		}
 		return jobDTOs;
-	}
-
+}
+		
 
 
 	@Override

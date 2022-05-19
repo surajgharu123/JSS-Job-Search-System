@@ -68,9 +68,10 @@ public class EmployeeController {
 	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of Jobs by Job Id", notes = "This Rest API will return List of Jobs by Job Id")
 	public ResponseEntity<List<Job>> searchByJobId(
-			@RequestParam(name = "jobID", required = false) Integer id)
+			@RequestParam(name = "jobID", required = false) Integer id,
+			@RequestHeader("Authorization") String authToken)
 			 {
-		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id), HttpStatus.OK);
+		return new ResponseEntity<List<Job>>(jobService.searchByJobId(id,authToken), HttpStatus.OK);
 
 	}
 	

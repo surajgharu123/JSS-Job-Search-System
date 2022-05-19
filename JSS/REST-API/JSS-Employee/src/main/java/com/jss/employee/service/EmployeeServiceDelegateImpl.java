@@ -26,13 +26,13 @@ public class EmployeeServiceDelegateImpl implements EmployeeServiceDelegate {
 	headers.set("Authorization", authToken);
 	HttpEntity entity = new HttpEntity(headers);
 	ResponseEntity<Boolean> response =
-	this.restTemplate.exchange("http://API-GATEWAY/jss/user/employee/authenticate", HttpMethod.POST, entity, Boolean.class);
-	
+//	this.restTemplate.exchange("http://localhost:5500/jss/user/auth-token/validation/employee", HttpMethod.POST, entity, Boolean.class);
+			this.restTemplate.exchange("http://API-GATEWAY/jss/user/auth-token/validation/employee", HttpMethod.POST, entity, Boolean.class);
 	return response.getBody();
 	}
-	public boolean fallbackIsTokenValid(String authToken,Exception exception) {
-		System.out.println("JSS-Employee-Login failed -Inside fallbackIsTokenValid");
-		return false;
-	}
+	 public boolean fallbackIsTokenValid(String authToken,Exception exception) {
+	 System.out.println("JSS-Employee-Login failed -Inside fallbackIsTokenValid");
+	 return false;
+	 }
 
 }
