@@ -57,7 +57,7 @@ public class UserManagementDelegateImple implements UserManagementDelegate {
 		return false;
 		}
 	
-	//@CircuitBreaker(name = "GET_DATA_FROM_DIFFERENT_TABELS",fallbackMethod = "fallbackIsbringData")
+	@CircuitBreaker(name = "GET_DATA_FROM_DIFFERENT_TABELS",fallbackMethod = "fallbackIsbringData")
 	@Override
 	public String getUserName(String authToken) {
 		// TODO Auto-generated method stub
