@@ -9,6 +9,7 @@ export class JobSeeker {
     skillset:String = '';
     roles:String= '';	
     jobID: number = 0;
+    password:string = '';
 
 
 }

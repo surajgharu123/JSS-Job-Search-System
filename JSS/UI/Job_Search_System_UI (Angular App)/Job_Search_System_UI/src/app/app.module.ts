@@ -19,6 +19,8 @@ import { CreatedJobByEmployeeComponent } from './components/forms/created-job-by
 import { JobListsComponent } from './components/tables/job-list/job-lists.component';
 import { JobseekerListComponent } from './components/tables/jobseeker-list/jobseeker-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeSeekerService } from './service/employeeSeekerService.service';
+import { JobSeekerService } from './service/jobSeekerService.service';
 
 @NgModule({
   declarations: [
@@ -37,14 +39,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     EmployeeRegistrationComponent,
     CreatedJobByEmployeeComponent,
     JobListsComponent,
-    JobseekerListComponent
+    JobseekerListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [EmployeeSeekerService,JobSeekerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
