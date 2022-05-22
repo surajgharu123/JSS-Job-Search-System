@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JobSeeker } from 'src/app/Entity/jobSeekerEntity.entity';
 
 import { JobSeekerService } from 'src/app/service/jobSeekerService.service';
@@ -11,7 +12,7 @@ import { JobSeekerService } from 'src/app/service/jobSeekerService.service';
 })
 export class JobseekerLoginComponent {
 
-  constructor( private jobSeekerService: JobSeekerService) {
+  constructor( private jobSeekerService: JobSeekerService, private route : Router) {
     // this.jobSeekerService.getData().subscribe((serverdata) => {
     //   console.log("Server Data : ", serverdata);
     // })
@@ -34,6 +35,10 @@ export class JobseekerLoginComponent {
     this.jobSeekerService.authentication(jobSeekerObject).subscribe((responseData)=> {
      this.jobSeekerService.AUTH_TOKEN += responseData['jwt'];
       console.log("Server Resonse Data " , this.jobSeekerService.AUTH_TOKEN);
+      if(this.jobSeekerService.AUTH_TOKEN.length >12)
+      {
+        this.route.navigate(['/home']);
+      }
     }, (error)=> {
       console.log("Server Error" , error);
     })

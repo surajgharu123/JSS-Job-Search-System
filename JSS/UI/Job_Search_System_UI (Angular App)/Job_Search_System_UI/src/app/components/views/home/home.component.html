@@ -56,25 +56,15 @@
   <div class="px-3 py-2 border-bottom mb-3">
     <div class="container d-flex flex-wrap justify-content-center">
       <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto ">
-        <div class="col-md-6 mb-4">
-          <div class="form-outline">
-            <input type="search" class="form-control" placeholder="Search By Company"  aria-label="Search"  #searchCompany>
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-4">
-          <div class="form-outline">
-            <input type="search" class="form-control"  placeholder="Search By Skill"  aria-label="Search"  #searchSkill>
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-4">
-          <div class="form-outline">
-            <input type="search" class="form-control"  placeholder="Search By Designation"  aria-label="Search"  #searchDesignation>
-        </div>
-        </div>
-        
-        <button type="button" class="btn btn-primary text-dark me-2" (click) ="getFilteredData(searchCompany.value,searchSkill.value,searchDesignation.value)">Search</button>
+        <div class="input-group">
+            <input type="search" class="form-control  input-sm" placeholder="Search By Company"  aria-label="Search"  #searchCompany>
+               
+            <input type="search" class="form-control  input-sm"  placeholder="Search By Skill"  aria-label="Search"  #searchSkill>
+       
+            <input type="search" class="form-control  input-sm"  placeholder="Search By Designation"  aria-label="Search"  #searchDesignation>
+       
+        <button type="button" class="btn btn-primary input-sm text-dark me-2" (click) ="getFilteredData(searchCompany.value,searchSkill.value,searchDesignation.value)">Search</button>
+      </div>
       </form>
 
       <div class="text-end">
@@ -84,15 +74,48 @@
     </div>
   </div>
 </header>
-<!-- 
-  <div class="container-fluid pb-3">
-    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-      <div class="bg-light border rounded-3">
-        <br><br><br><br><br><br><br><br><br><br>
-      </div>
-      <div class="bg-light border rounded-3">
-        <br><br><br><br><br><br><br><br><br><br>
-      </div>
-    </div>
-  </div> -->
+
+
 <app-jobs></app-jobs>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">Who Am I?</h3>
+  <!-- <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?cs=srgb&dl=pexels-fauxels-3184465.jpg&fm=jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350"> -->
+  <img src="https://images.pexels.com/photos/4050316/pexels-photo-4050316.jpeg?cs=srgb&dl=pexels-vlada-karpovich-4050316.jpg&fm=jpg" class="rounded-circle" alt="Cinque Terre" width="304" height="236"> 
+   <h3>I'm an adventurer</h3>
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">What Am I?</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+  <a href="#" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </a>
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">    
+  <h3 class="margin">Where To Find Me?</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="https://images.pexels.com/photos/3771055/pexels-photo-3771055.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3771055.jpg&fm=jpg" class="img-responsive margin rounded" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4"> 
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="https://images.pexels.com/photos/3791533/pexels-photo-3791533.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3791533.jpg&fm=jpg" class="img-responsive margin rounded" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4"> 
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="https://images.pexels.com/photos/5058915/pexels-photo-5058915.jpeg?cs=srgb&dl=pexels-thirdman-5058915.jpg&fm=jpg" class="img-responsive margin rounded" style="width:100%" alt="Image">
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com">www.w3schools.com</a></p> 
+</footer>
+

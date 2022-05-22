@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Employee } from "../Entity/employeeEntity.entity";
@@ -13,6 +13,7 @@ export class EmployeeSeekerService {
     }
 
     REST_API = "http://localhost:5300/jss/user/";
+    BASE_API = "http://localhost:5301/jss/employee";
     AUTH_TOKEN = "Bearer ";
 
     authentication(employeeSeekerObject: Employee): Observable<any> {
@@ -26,9 +27,6 @@ export class EmployeeSeekerService {
            
         }
 
-
-
-
         return this.httpClient.post<any>(this.REST_API + "employee/authenticate", JSON.stringify(employeeSeekerObject), httpOptions);
     }
 
@@ -41,4 +39,20 @@ export class EmployeeSeekerService {
         };
         return this.httpClient.post<any>(this.REST_API + 'employee/register', JSON.stringify(employees), httpOptions);
     }
+
+    
+    // getDataBySearchFlied = ( searchSkill:string) : Observable<any> => {
+    //     let httpOptions = {
+    //         headers: new HttpHeaders({
+    //             'Access-Control-Allow-Origin': '*',
+    //         }),
+
+    //     }
+    //     let paramsT = new HttpParams()
+    //         .set('skills', searchSkill)
+
+    //     return this.httpClient.get<any>(this.BASE_API + "/search/filtercriteria",{params:paramsT});
+
+    // }
+
 }

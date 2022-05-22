@@ -23,6 +23,9 @@ export class AppComponent {
         else if(event['url'] == '/emp-login'){
           this.showHead = false;
         }
+        else if(event['url'] == '/emp-sign'){
+          this.showHead = false;
+        }
         // else if(event['url'] =='/emp-sign') {
         //   this.showHead = false;
         // }

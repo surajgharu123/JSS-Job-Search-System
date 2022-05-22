@@ -20,10 +20,7 @@ export class HomeComponent  {
       console.log(serverResponse);
       this.jobService.jobsData = serverResponse;
     })
-
-
-
-
   }
+  
 
 }
