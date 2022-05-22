@@ -13,7 +13,7 @@
             <div class="col-xl-6">
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">JobSeeker Registration</h3>
-<form #productForm="ngForm" [formGroup]="jobSeekerRegisterForm" (ngSubmit)="submitJobSeekerDetails()" novalidate>
+<form [formGroup]="jobSeekerRegisterForm" (ngSubmit)="submitJobSeekerDetails()">
     <div class="container">
 
         <div class="form-group">
@@ -111,7 +111,7 @@
         </div>
         <br />
         <div class="form-group">
-            <button type="submit"  disabled=“!productForm.form.valid”  class="btn btn-warning btn-lg ms-2" routerLink="/login">Submit</button>
+            <button type="submit" class="btn btn-warning btn-lg ms-2" routerLink="/login">Submit</button>
         </div>
         <br />
     </div>
