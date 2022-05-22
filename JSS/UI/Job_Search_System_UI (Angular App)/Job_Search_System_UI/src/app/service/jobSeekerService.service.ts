@@ -57,5 +57,14 @@ export class JobSeekerService {
         return this.httpClient.get<any>(this.REST_API + "search",{params:paramsT});
 
     }
+    jobseekerRegister(jobseeker:any): Observable<any>{
+        let httpOptions={
+            headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.httpClient.post<any>('http://localhost:5300/jss/user/job/register', JSON.stringify(jobseeker), httpOptions);
+    }
 
 }
