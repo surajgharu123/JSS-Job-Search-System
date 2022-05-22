@@ -9,6 +9,8 @@ import { JobSeekerService } from 'src/app/service/jobSeekerService.service';
 })
 export class JobseekerRegistrationComponent  {
 
+
+
   jobSeekerRegisterForm = new FormGroup({
     name : new FormControl(null, [Validators.required, Validators.minLength(3)]),
     username : new FormControl("", [Validators.required, Validators.minLength(3),Validators.maxLength(12)]),

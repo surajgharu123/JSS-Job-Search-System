@@ -1,1 +1,41 @@
-<p>job-lists works!</p>
+<div class="card"
+    style="height: 700px; margin-left: 200px; margin-right: 200px; margin-bottom: 30px; margin-top: 30px;"
+     >
+
+    <div class="card-header" style="color: chocolate;" >
+
+       About Job
+
+    </div>
+
+    <div class="card-body">
+
+        <h2 class="card-title" style="color: palevioletred;">{{ jobSeekerService.SPECIFIC_DATA[0].jobTitle }}</h2>
+
+        <p class="card-text" style="text-decoration-color: darkgray;">A computer programmer, sometimes referred to as a
+            software developer,
+
+            a software engineer, a programmer, or more recently a coder, is a person who creates computer
+
+            software. A programmer's most often-used computer language may be prefixed to the aforementioned
+
+            terms.</p><br>
+        <h3 class="card-title" style="color: palevioletred;">Job-Description</h3>
+
+        <p class="card-text" style="text-decoration-color: darkgray;">{{ jobSeekerService.SPECIFIC_DATA[0].description }}</p><br>
+
+        <h3 style="color: palevioletred;">Qualifications</h3>
+
+        <ul style="text-decoration-color: darkgray;">
+
+            
+                <li>{{jobSeekerService.SPECIFIC_DATA[0].skills}}</li>
+            
+           
+        </ul>
+
+        <a href="#" class="btn btn-primary" routerLink="/jobseeker-home">Go-Back</a>
+
+    </div>
+
+</div>

@@ -9,8 +9,10 @@ export class JobSeekerService {
 
     REST_API_USER= "http://localhost:5300/jss/user/";
     REST_API = "http://localhost:5302/jss/jobseeker/";
-
+    JOBSEEKER_LOGIN = false;
     AUTH_TOKEN = "Bearer ";
+    jobData = [];
+    SPECIFIC_DATA:Array<any> = new Array();
     constructor(private httpClient: HttpClient) {
         
     }
@@ -65,6 +67,40 @@ export class JobSeekerService {
             })
         };
         return this.httpClient.post<any>('http://localhost:5300/jss/user/job/register', JSON.stringify(jobseeker), httpOptions);
+    }
+
+
+    filterJobDataByLoaction(searchByLocation:string) : Observable<any> {
+
+        let paramByLocation = new HttpParams().set('location', searchByLocation);
+        return this.httpClient.get<any>(this.REST_API+"searchLocation" , {params : paramByLocation});
+    }
+
+
+    applyForJob(jobDetails:any) : Observable<any> {
+
+        let httpOptions = {
+            headers : new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                "Authorization" : this.AUTH_TOKEN
+            })
+        }
+
+       return this.httpClient.post<any>(this.REST_API+"apply/job",jobDetails,httpOptions);
+    }
+
+    getSpecificJobDetails(id:number) : Observable<any> {
+
+        let httpOptions = {
+            headers : new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                "Authorization" : this.AUTH_TOKEN
+            })
+        }
+
+        return this.httpClient.get<any>(this.REST_API+id,httpOptions);
     }
 
 }

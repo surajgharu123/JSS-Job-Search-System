@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EmployeeSeekerService } from 'src/app/service/employeeSeekerService.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class JobsCreationComponent  {
 
   })
   job:any =[];
-  constructor(private employeeService: EmployeeSeekerService){
+  constructor(private employeeService: EmployeeSeekerService, private route:Router){
 
   }
   submitJobDetails = () => {
@@ -43,6 +44,7 @@ export class JobsCreationComponent  {
       this.employeeService.postAJob(new_job).subscribe((serverResponse)=>{
           console.log('jobseekerRegister Details - serviceResponse :',serverResponse);
           this.job.push(serverResponse);
+         // this.route.navigate(['/employee-home']);
       })
 
    console.log(this.postjobForm.value);

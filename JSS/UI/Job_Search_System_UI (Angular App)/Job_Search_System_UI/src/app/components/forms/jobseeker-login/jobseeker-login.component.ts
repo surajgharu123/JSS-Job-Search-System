@@ -37,7 +37,9 @@ export class JobseekerLoginComponent {
       console.log("Server Resonse Data " , this.jobSeekerService.AUTH_TOKEN);
       if(this.jobSeekerService.AUTH_TOKEN.length >12)
       {
-        this.route.navigate(['/home']);
+        alert("You Logged In SuccessFully");
+        this.route.navigate(['/jobseeker-home']);
+        
       }
     }, (error)=> {
       console.log("Server Error" , error);
