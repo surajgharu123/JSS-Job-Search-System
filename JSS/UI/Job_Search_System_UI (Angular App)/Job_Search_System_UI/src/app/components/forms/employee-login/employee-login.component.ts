@@ -33,7 +33,8 @@ export class EmployeeLoginComponent implements OnInit {
       this.employeeSeekerService.AUTH_TOKEN += responseData['jwt'];
       console.log(this.employeeSeekerService.AUTH_TOKEN);
       if(this.employeeSeekerService.AUTH_TOKEN.length > 12) {
-        this.router.navigate(['/home']);
+        alert("You Have Successfull LogIn")
+        this.router.navigate(['/employee-home']);
         console.log("Hello Guys ", this.employeeSeekerService.AUTH_TOKEN.length);
     }
 

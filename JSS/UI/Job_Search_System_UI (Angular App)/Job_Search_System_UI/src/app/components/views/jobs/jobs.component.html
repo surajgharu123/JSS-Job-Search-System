@@ -1,14 +1,25 @@
-
-<div *ngFor="let job of jobList">
-    <div class="sizeOfCard">
-      <div class="card ">
-        <div class="card-header">Hello world</div>
-        <div class="card-body">
-          <h5 class="card-title">{{job.jobTitle}}</h5>
-          <p class="card-text">{{job.description}}</p>
+<div *ngFor="let job of filteredListData; let i = index">
+  <div class="sizeOfCard">
+    <div class="card ">
+      <div class="card-header">Hello world</div>
+      <div class="card-body">
+        <h5 class="card-title">{{job.jobTitle}}</h5>
+        <p class="card-text">{{job.description}}</p>
+        <div *ngIf="!jobSeekerLoggedIn">
           <a routerLink="/sign-up" class="btn btn-primary" style="margin-right: 20px ;">Register For apply</a>
           <a routerLink="/login" class="btn btn-primary">Login For apply</a>
         </div>
+
+        <div *ngIf="jobSeekerLoggedIn">
+          <a class="btn btn-primary" style="margin-right: 20px ;" (click)="showDetails(job)">Job Details</a>
+          <a class="btn btn-primary" (click)="applyForAJob(job,changeToApply)" #changeToApply>{{"Apply"}}</a>
+        </div>
+
+
+
+
+
       </div>
     </div>
   </div>
+</div>

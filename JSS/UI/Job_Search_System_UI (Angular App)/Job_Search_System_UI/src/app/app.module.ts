@@ -23,6 +23,8 @@ import { EmployeeSeekerService } from './service/employeeSeekerService.service';
 import { JobSeekerService } from './service/jobSeekerService.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JobService } from './service/jobService.service';
+import { EmployeeHomePageComponent } from './components/forms/employee-home-page/employee-home-page.component';
+import { JobseekerHomePageComponent } from './components/forms/jobseeker-home-page/jobseeker-home-page.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { JobService } from './service/jobService.service';
     CreatedJobByEmployeeComponent,
     JobListsComponent,
     JobseekerListComponent,
+    EmployeeHomePageComponent,
+    JobseekerHomePageComponent
   ],
   imports: [
     BrowserModule,

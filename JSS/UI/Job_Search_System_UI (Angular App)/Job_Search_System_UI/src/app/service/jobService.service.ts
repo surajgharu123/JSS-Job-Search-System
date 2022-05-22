@@ -21,4 +21,9 @@ export class JobService{
         return this.httpClient.get<any>("http://localhost:5302/jss/jobseeker/", httpOptions);
     }
 
+
+    
+
+    
+
 }

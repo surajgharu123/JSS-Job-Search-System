@@ -26,9 +26,18 @@ export class AppComponent {
         else if(event['url'] == '/emp-sign'){
           this.showHead = false;
         }
-        // else if(event['url'] =='/emp-sign') {
-        //   this.showHead = false;
-        // }
+        else if(event['url'] =='/jobseeker-home') {
+          this.showHead = false;
+        }
+        else if(event['url'] == '/employee-home'){
+          this.showHead = false;
+        }
+        else if(event['url'] == '/post-a-job') {
+          this.showHead = false;
+        }
+        else if(event['url'] == '/specific-job-details') {
+          this.showHead  = false;
+        }
          else {
           this.showHead = true;
         }
