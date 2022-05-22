@@ -48,8 +48,7 @@ import { JobService } from './service/jobService.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    NgModule
+    HttpClientModule
   ],
   providers: [
     EmployeeSeekerService,
