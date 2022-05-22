@@ -11,9 +11,11 @@ import { JobSeekerService } from 'src/app/service/jobSeekerService.service';
 })
 export class JobseekerLoginComponent {
 
-  // constructor( private jobSeekerService: JobSeekerService) {
-  //   // jobSeekerService.get
-  //  }
+  constructor( private jobSeekerService: JobSeekerService) {
+    // this.jobSeekerService.getData().subscribe((serverdata) => {
+    //   console.log("Server Data : ", serverdata);
+    // })
+   }
 
 
   jobSeekerForm = new FormGroup({
@@ -29,12 +31,12 @@ export class JobseekerLoginComponent {
 
     console.log(jobSeekerObject);
 
-    // this.jobSeekerService.authentication(jobSeekerObject).subscribe((responseData)=> {
-    //  this.jobSeekerService.AUTH_TOKEN += responseData['jwt'];
-    //   console.log("Server Resonse Data " , this.jobSeekerService.AUTH_TOKEN);
-    // }, (error)=> {
-    //   console.log("Server Error" , error);
-    // })
+    this.jobSeekerService.authentication(jobSeekerObject).subscribe((responseData)=> {
+     this.jobSeekerService.AUTH_TOKEN += responseData['jwt'];
+      console.log("Server Resonse Data " , this.jobSeekerService.AUTH_TOKEN);
+    }, (error)=> {
+      console.log("Server Error" , error);
+    })
 
   }
 }

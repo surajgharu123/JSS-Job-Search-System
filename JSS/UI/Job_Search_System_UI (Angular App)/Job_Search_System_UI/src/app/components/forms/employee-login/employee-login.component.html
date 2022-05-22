@@ -1,4 +1,4 @@
-<!-- <section class="vh-100">
+<section class="vh-100">
     <div class="container py-5 h-100">
       <div class="row d-flex align-items-center justify-content-center h-100">
         <div class="col-md-8 col-lg-7 col-xl-6">
@@ -6,41 +6,42 @@
             class="img-fluid" alt="Phone image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-         
-          <form [formGroup]="jobSeekerForm" (ngSubmit)="checkLoginCredentails()">
-       
-                <div class="form-outline mb-4">
-                   
-                    <input type="Text"  id="form1Example13"  placeholder="Username" formControlName="username" class="form-control form-control-lg" />
-                    <label class="form-label" for="form1Example13">Username</label>
+            <h3 class="mb-5 text-uppercase text-primary">Employee Login form</h3>
+            <form [formGroup] = "employeeLoginForm" (ngSubmit)="checkLoginCredentails()">
+                <div class="container">
+                    <div class="form-outline mb-4">
+                        
+                        <input type="Text" id="form1Example13" placeholder="Username" formControlName="username" class="form-control form-control-lg" />
+                        <label class="form-label" for="form1Example13">Username</label>
+                    </div>
+                    <div *ngIf="employeeLoginForm.controls['username'].hasError('required')" class="alert alert-danger">
+                        Please Enter Username because Username is Required field
+                    </div>
+                    <div *ngIf="employeeLoginForm.controls['username'].hasError('minlength')" class="alert alert-danger">
+                        Please Enter Username with minlength of 3
+                    </div>
+                    <div class="form-outline mb-4" >
+                        
+                        <input type="text" id="form1Example23" placeholder="password" formControlName="password" class="form-control form-control-lg" />
+                        <label class="form-label" for="form1Example23">Password</label>
+                    </div>
+                    <div *ngIf="employeeLoginForm.controls['password'].hasError('required')" class="alert alert-danger">
+                        Please Enter Password because Password is Required field
+                    </div>
+                    <div *ngIf="employeeLoginForm.controls['password'].hasError('minlength')" class="alert alert-danger">
+                        Please Enter Username with minlength of 3
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-right: 20px ;" >Sign-In</button>
+                    
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" routerLink="/emp-sign">Sign-Up</button>
                 </div>
-                <div *ngIf="jobSeekerForm.controls['username'].hasError('required')" class="alert alert-danger">
-                    Please Enter Username because Username is Required field
-                </div>
-                <div *ngIf="jobSeekerForm.controls['username'].hasError('minlength')" class="alert alert-danger">
-                    Please Enter Username with minlength of 3
-                </div>
-                <div class="form-outline mb-4" >
-                   
-                    <input type="text" type="password" id="form1Example23" placeholder="password" formControlName="password" class="form-control" />
-                    <label class="form-label" for="form1Example23">Password</label>
-                </div>
-                <div *ngIf="jobSeekerForm.controls['password'].hasError('required')" class="alert alert-danger">
-                    Please Enter Password because Password is Required field
-                </div>
-                <div *ngIf="jobSeekerForm.controls['password'].hasError('minlength')" class="alert alert-danger">
-                    Please Enter Username with minlength of 3
-                </div>
-                <button type="submit">Log In</button>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-               
-           
-        </form>
+            </form>
+          
         </div>
       </div>
     </div>
-  </section> 
-   -->
+  </section>
 <!-- 
 <form [formGroup]="jobSeekerForm" (ngSubmit)="checkLoginCredentails()">
     <div class="container">

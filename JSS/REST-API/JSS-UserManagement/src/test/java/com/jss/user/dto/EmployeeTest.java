@@ -129,7 +129,7 @@ class EmployeeTest {
 		
 		
 		userEmployeeDTO.setContact(6564);
-		when(userEmployeeDTO.getContact()).thenReturn(5454);
+		when(userEmployeeDTO.getContact()).thenReturn(5454l);
 		
 		assertNotEquals(userEmployeeDTO.getContact(), "SDE");
 	}

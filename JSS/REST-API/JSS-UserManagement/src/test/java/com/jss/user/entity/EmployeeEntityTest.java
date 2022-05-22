@@ -131,7 +131,7 @@ class EmployeeEntityTest {
 		
 		
 		userEmployeeEntity.setContact(6564);
-		when(userEmployeeEntity.getContact()).thenReturn(5454);
+		when(userEmployeeEntity.getContact()).thenReturn(5454l);
 		
 		assertNotEquals(userEmployeeEntity.getContact(), "SDE");
 	}

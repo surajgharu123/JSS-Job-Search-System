@@ -22,6 +22,13 @@ spring:
         predicates:
           - Path=/jss/employee/**
           
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+      
+                   
+
     
 eureka:
   client:
@@ -30,3 +37,5 @@ eureka:
   instance:
     hostname: localhost
     instance-id: ${spring.application.name}:${random.uuid}  
+    
+    

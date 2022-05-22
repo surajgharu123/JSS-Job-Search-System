@@ -31,4 +31,14 @@ export class EmployeeSeekerService {
 
         return this.httpClient.post<any>(this.REST_API + "employee/authenticate", JSON.stringify(employeeSeekerObject), httpOptions);
     }
+
+    employeeRegister(employees:any): Observable<any>{
+        let httpOptions={
+            headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.httpClient.post<any>(this.REST_API + 'employee/register', JSON.stringify(employees), httpOptions);
+    }
 }

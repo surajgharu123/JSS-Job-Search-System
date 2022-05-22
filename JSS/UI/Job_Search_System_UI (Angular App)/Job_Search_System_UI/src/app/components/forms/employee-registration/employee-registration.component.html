@@ -1,1 +1,200 @@
-<p>employee-registration works!</p>
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                                alt="Sample photo" class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; margin-top: 250px;" />
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-5 text-uppercase text-primary">Employee registration form</h3>
+
+
+                                <form [formGroup]="employeeRegisterForm" (ngSubmit)="submitEmployeeDetails()">
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="userName" placeholder="Username"
+                                                id="form3Example8" class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Example8">User Name</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['userName'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Username
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['userName'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 3
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['userName'].hasError('maxlength')"
+                                            class="alert alert-danger">
+                                            Please Add Maximum Length 12
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="password" formControlName="password" placeholder="Password"
+                                                id="form3Example1n" class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Example1n">Password</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['password'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Password
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['password'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 6
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['password'].hasError('maxlength')"
+                                            class="alert alert-danger">
+                                            Please Add Maximum Length 12
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <select formControlName="role" placeholder="Roles"
+                                                class="form-control form-control-lg" id = "form3Example1r">
+                                                <option>HR</option>
+                                                <option>Tech HR</option>
+                                            </select>
+                                            <label class="form-label" for="form3Example1r">Role</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['role'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Roles
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="orgnizationName"
+                                                placeholder="Organization Name" id="form3Example1a"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Example1a">Organization
+                                                Name</label>
+
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['orgnizationName'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Organization Name
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['orgnizationName'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Maximum Length 4
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="contact" id="form3Example1b"
+                                                class="form-control form-control-lg" placeholder="Contact Number" />
+                                            <label class="form-label" for="form3Example1b">Contact
+                                                Number</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['contact'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Contact Number
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['contact'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 10
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['contact'].hasError('maxlength')"
+                                            class="alert alert-danger">
+                                            Please Add Maximum Length 10
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="email" id="form3Example1c"
+                                                class="form-control form-control-lg" placeholder="Email" />
+                                            <label class="form-label" for="form3Example1c">Email
+                                                Number</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['email'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Email
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="location" id="form3Example1d"
+                                                class="form-control form-control-lg" placeholder="Branch Location" />
+                                            <label class="form-label" for="form3Example1d">Branch
+                                                Location</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['location'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Location
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['location'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 3
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="description" id="form3Example1e"
+                                                class="form-control form-control-lg" placeholder="Description" />
+                                            <label class="form-label" for="form3Example1e">Description</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['description'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Description
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['description'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 3
+                                        </div>
+                                    </div>
+
+
+
+                                    <div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" formControlName="address" id="form3Example1f"
+                                                class="form-control form-control-lg" placeholder="Address" />
+                                            <label class="form-label" for="form3Example1f">Address</label>
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['address'].hasError('required')"
+                                            class="alert alert-danger">
+                                            Please Add Address
+                                        </div>
+                                        <div *ngIf="employeeRegisterForm.controls['address'].hasError('minlength')"
+                                            class="alert alert-danger">
+                                            Please Add Minimum Length 3
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                                        <button type="submit" class="btn btn-primary btn-lg ms-2" routerLink="/emp-login">Submit
+                                            form</button>
+                                    </div>
+
+                                </form>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

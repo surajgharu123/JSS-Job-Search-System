@@ -44,7 +44,7 @@ public class EmployeeEntity {
 	@ApiModelProperty("Employee Notice Period")
 	private int noticePeriod;
 	@ApiModelProperty("Employee Contact Number")
-	private int contact;
+	private long contact;
 	@ApiModelProperty("Employee Email")
 	private String email;
 	@ApiModelProperty("Employee Status")
@@ -58,7 +58,7 @@ public class EmployeeEntity {
 	}
 	
 	public EmployeeEntity(int id, String userName, String password, String orgnizationName, String address, String jobTitle,
-			String location, String description, int experience, int salary, int noticePeriod, int contact,
+			String location, String description, int experience, int salary, int noticePeriod, long contact,
 			String email, String status, String role) {
 	
 		this.id = id;
@@ -143,10 +143,10 @@ public class EmployeeEntity {
 	public void setNoticePeriod(int noticePeriod) {
 		this.noticePeriod = noticePeriod;
 	}
-	public int getContact() {
+	public long getContact() {
 		return contact;
 	}
-	public void setContact(int contact) {
+	public void setContact(long contact) {
 		this.contact = contact;
 	}
 	public String getEmail() {

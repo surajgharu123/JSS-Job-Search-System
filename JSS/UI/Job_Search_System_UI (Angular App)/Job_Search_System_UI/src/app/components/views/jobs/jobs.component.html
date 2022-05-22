@@ -1,1 +1,14 @@
-<p>jobs works!</p>
+
+<div *ngFor="let job of jobList">
+    <div class="sizeOfCard">
+      <div class="card ">
+        <div class="card-header">{{job.companyName}}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{job.jobTitle}}</h5>
+          <p class="card-text">{{job.description}}</p>
+          <a routerLink="/sign-up" class="btn btn-primary" style="margin-right: 20px ;">Register For apply</a>
+          <a routerLink="/login" class="btn btn-primary">Login For apply</a>
+        </div>
+      </div>
+    </div>
+  </div>

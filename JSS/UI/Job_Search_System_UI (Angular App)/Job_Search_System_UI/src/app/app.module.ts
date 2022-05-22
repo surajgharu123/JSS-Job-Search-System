@@ -21,6 +21,9 @@ import { JobseekerListComponent } from './components/tables/jobseeker-list/jobse
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeeSeekerService } from './service/employeeSeekerService.service';
 import { JobSeekerService } from './service/jobSeekerService.service';
+import { HttpClientModule } from '@angular/common/http';
+import { JobService } from './service/jobService.service';
+
 
 @NgModule({
   declarations: [
@@ -44,9 +47,14 @@ import { JobSeekerService } from './service/jobSeekerService.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [EmployeeSeekerService,JobSeekerService],
+  providers: [
+    EmployeeSeekerService,
+    JobSeekerService,
+    JobService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

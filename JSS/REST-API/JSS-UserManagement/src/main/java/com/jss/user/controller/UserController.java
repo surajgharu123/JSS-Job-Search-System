@@ -55,7 +55,7 @@ public class UserController {
 	}
 	//Register User
 	
-	@PostMapping(value = "/employee/register",produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/employee/register",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 	public UserEmployeeDTO getUserRegistration(@RequestBody UserEmployeeDTO login){
 	//	login.setId(1001);
 		//return new ResponseEntity<UserDTO>(login, HttpStatus.OK);

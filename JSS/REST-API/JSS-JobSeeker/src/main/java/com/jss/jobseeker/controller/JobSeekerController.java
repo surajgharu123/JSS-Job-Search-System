@@ -42,7 +42,7 @@ public class JobSeekerController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(value = "/", produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ApiOperation(value = "Get All Jobs Data", notes = "This Rest API helps to Get All Data From")
 	public ResponseEntity<List<JobDTO>> getAllRecords() {
 		return new ResponseEntity<List<JobDTO>>(jobSeekerService.getAllRecords(), HttpStatus.ACCEPTED);

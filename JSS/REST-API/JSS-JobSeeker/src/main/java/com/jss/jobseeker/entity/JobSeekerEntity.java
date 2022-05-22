@@ -14,7 +14,7 @@ public class JobSeekerEntity {
 	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@ApiModelProperty(value = "JobSeeker Id")
 	private int id;
 	@ApiModelProperty(value = "JobSeeker Name")

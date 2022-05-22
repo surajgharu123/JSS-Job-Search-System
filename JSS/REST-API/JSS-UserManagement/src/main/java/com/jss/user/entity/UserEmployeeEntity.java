@@ -25,7 +25,7 @@ public class UserEmployeeEntity {
 	private int experience;
 	private int salary;
 	private int noticePeriod;
-	private int contact;
+	private long contact;
 	private String email;
 	private String status;
 	private String role;
@@ -36,7 +36,7 @@ public class UserEmployeeEntity {
 
 	public UserEmployeeEntity(int id, String userName, String password, String orgnizationName, String address,
 			String jobTitle, String location, String description, int experience, int salary, int noticePeriod,
-			int contact, String email, String status, String role) {
+			long contact, String email, String status, String role) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -151,11 +151,11 @@ public class UserEmployeeEntity {
 		this.noticePeriod = noticePeriod;
 	}
 
-	public int getContact() {
+	public long getContact() {
 		return contact;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(long contact) {
 		this.contact = contact;
 	}
 

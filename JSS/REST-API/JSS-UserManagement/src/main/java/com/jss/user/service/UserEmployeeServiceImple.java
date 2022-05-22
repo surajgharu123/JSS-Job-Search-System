@@ -46,7 +46,7 @@ public class UserEmployeeServiceImple implements UserEmployeeService {
 			throw new InvalidCredentialsException(ex.toString());
 			}
 			String jwt=jwtUtil.generateToken(userDTO.getUserName());
-			return jwt;
+			return  "{ \"jwt\": \"" + jwt + "\"}";
 
 
 

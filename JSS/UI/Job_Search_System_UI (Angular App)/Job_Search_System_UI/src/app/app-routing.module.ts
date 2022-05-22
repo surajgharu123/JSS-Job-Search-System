@@ -7,9 +7,11 @@ import { EmployeeRegistrationComponent } from './components/forms/employee-regis
 import { LoginComponent } from './components/views/login/login.component';
 import { JobseekerRegistrationComponent } from './components/forms/jobseeker-registration/jobseekerregistration.component';
 const routes: Routes = [
+         {path:'home', component:HomeComponent},
          {path: 'login', component:JobseekerLoginComponent},
          {path:'sign-up', component:JobseekerRegistrationComponent},
          {path:'emp-login', component:EmployeeLoginComponent},
+         {path:'emp-sign', component:EmployeeRegistrationComponent}
 
          
 ];

@@ -14,7 +14,7 @@ public class UserEmployeeDTO {
 	private int experience;
 	private int salary;
 	private int noticePeriod;
-	private int contact;
+	private long contact;
 	private String email;
 	private String status;
 	private String role;
@@ -25,7 +25,7 @@ public class UserEmployeeDTO {
 	}
 	
 	public UserEmployeeDTO(int id, String userName, String password, String orgnizationName, String address, String jobTitle,
-			String location, String description, int experience, int salary, int noticePeriod, int contact,
+			String location, String description, int experience, int salary, int noticePeriod, long contact,
 			String email, String status, String role) {
 	
 		this.id = id;
@@ -110,10 +110,10 @@ public class UserEmployeeDTO {
 	public void setNoticePeriod(int noticePeriod) {
 		this.noticePeriod = noticePeriod;
 	}
-	public int getContact() {
+	public long getContact() {
 		return contact;
 	}
-	public void setContact(int contact) {
+	public void setContact(long contact) {
 		this.contact = contact;
 	}
 	public String getEmail() {

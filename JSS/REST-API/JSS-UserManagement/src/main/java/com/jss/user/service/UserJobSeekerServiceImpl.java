@@ -86,7 +86,7 @@ public class UserJobSeekerServiceImpl implements UserJobSeekerService {
 			throw new InvalidCredentialsException(ex.toString());
 		}
 		String jwt = jwtUtil.generateToken(userJobDTO.getUsername());
-		return jwt;
+		return  "{ \"jwt\": \"" + jwt + "\"}";
 
 	}
 	
