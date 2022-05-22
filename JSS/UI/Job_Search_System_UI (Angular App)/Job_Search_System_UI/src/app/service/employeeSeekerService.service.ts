@@ -39,7 +39,17 @@ export class EmployeeSeekerService {
         };
         return this.httpClient.post<any>(this.REST_API + 'employee/register', JSON.stringify(employees), httpOptions);
     }
+    postAJob(job:any):Observable<any>{
+        let httpOptions = {
+            headers: new HttpHeaders({
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type' : 'application/json',
+                'Authorization' : this.AUTH_TOKEN
+            })
+        }
+        return this.httpClient.post<any>("http://localhost:5302/jss/jobseeker/", JSON.stringify(job), httpOptions);
 
+    }
     
     // getDataBySearchFlied = ( searchSkill:string) : Observable<any> => {
     //     let httpOptions = {

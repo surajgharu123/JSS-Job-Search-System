@@ -23,12 +23,18 @@ export class AppComponent {
         else if(event['url'] == '/emp-login'){
           this.showHead = false;
         }
+        else if(event['url'] == '/home'){
+          this.showHead = false;
+        }
         else if(event['url'] == '/emp-sign'){
           this.showHead = false;
         }
         // else if(event['url'] =='/emp-sign') {
         //   this.showHead = false;
         // }
+        else if(event['url'] =='/post-a-job') {
+          this.showHead = false;
+        }
          else {
           this.showHead = true;
         }

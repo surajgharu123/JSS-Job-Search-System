@@ -1,1 +1,132 @@
-<p>jobs-creation works!</p>
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                  alt="Sample photo" class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; margin-top: 250px;" />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">Post A Job Form</h3>
+<form  [formGroup]="postjobForm" #postAJob="ngForm" (ngSubmit)="submitJobDetails()" novalidate>
+    <div class="col-md-12">
+          <div class=" form-group">
+              <label for="jobrole" class="col-sm-3 control-label"><b>Job Role</b></label>
+              <input type="text" name="jobrole" id="jobrole" formControlName="jobTitle" class="form-control" placeholder="JOBROLE">
+              <div *ngIf="postjobForm.controls['jobTitle'].hasError('required')" class="alert alert-danger">
+                Please Add Job Title
+            </div>
+            <div *ngIf="postjobForm.controls['jobTitle'].hasError('minlength')" class="alert alert-danger">
+                Please Add Minimum Length 3
+            </div>
+          </div>
+          <br />
+          <div class=" form-group">
+            <label for="location" class="col-sm-3 control-label"><b>Location</b></label>
+            <input type="text" name="location" id="location" formControlName="location" class="form-control" placeholder="LOCATION">
+            <div *ngIf="postjobForm.controls['location'].hasError('required')" class="alert alert-danger">
+              Please Add Location
+          </div>
+          <div *ngIf="postjobForm.controls['location'].hasError('minlength')" class="alert alert-danger">
+              Please Add Minimum Length 3
+          </div>
+          <div *ngIf="postjobForm.controls['location'].hasError('maxlength')" class="alert alert-danger">
+            Please Add Maximum Length 12
+        </div>
+          </div>
+        <br />
+        <div class=" form-group">
+          <label for="jobDescription" class="col-sm-3 control-label"><b>Job Description</b></label>
+          <input type="text" name="jobDescription" id="jobDescription" formControlName="description" class="form-control" placeholder="Description">
+          <div *ngIf="postjobForm.controls['description'].hasError('required')" class="alert alert-danger">
+            Please Add Description
+        </div>
+        <div *ngIf="postjobForm.controls['description'].hasError('minlength')" class="alert alert-danger">
+            Please Add Minimum Length 3
+        </div>
+        <div *ngIf="postjobForm.controls['description'].hasError('maxlength')" class="alert alert-danger">
+            Please Add Maximum Length 50
+        </div>
+        </div>
+      <br />
+          <div class=" form-group">
+              <label for="expRequired" class="col-sm-3 control-label"><b>Experience</b></label>
+              <input type="number" name="expRequired" id="expRequired" formControlName="experience" class="form-control" placeholder="Exp">
+              <div *ngIf="postjobForm.controls['experience'].hasError('required')" class="alert alert-danger">
+                Please Add Experience
+            </div>
+            </div>
+          <br />
+          <div class=" form-group">
+            <label for="salary" class="col-sm-3 control-label"><b>Salary</b></label>
+            <input type="number" name="salary" id="salary" formControlName="salary" class="form-control" placeholder="Salary">
+            <div *ngIf="postjobForm.controls['salary'].hasError('required')" class="alert alert-danger">
+              Please Add Salary
+          </div>
+          <div *ngIf="postjobForm.controls['salary'].hasError('minlength')" class="alert alert-danger">
+            Please Add Minimum Length 4
+        </div>
+          </div>
+        <br />
+        <div class=" form-group">
+          <label for="noticePeriod" class="col-sm-3 control-label"><b>Notice Period</b></label>
+          <input type="number" name="noticePeriod" id="noticePeriod" formControlName="noticePeriod" class="form-control" placeholder="Notice Period">
+          <div *ngIf="postjobForm.controls['noticePeriod'].hasError('required')" class="alert alert-danger">
+            Please Add Notice Period
+        </div>
+        </div>
+      <br />
+      <div class=" form-group">
+        <label for="email" class="col-sm-3 control-label"><b>Email </b></label>
+        <input type="text" name="email" id="email" formControlName="contactEmail" class="form-control" placeholder="Email">
+        <div *ngIf="postjobForm.controls['contactEmail'].hasError('required')" class="alert alert-danger">
+          Please Add Contact Number
+      </div>
+      <div *ngIf="postjobForm.controls['contactEmail'].hasError('minlength')" class="alert alert-danger">
+          Please Add Minimum Length 4
+      </div>
+
+      </div>
+    <br />
+    <div class="form-group">
+      <label for="Status" class="col-sm-3 control-label"><b>Status </b></label>
+      <select formControlName="status" class="form-control" placeholder="Status">
+          <option>Open</option>
+          <option>Closed</option>
+      </select> 
+      <div *ngIf="postjobForm.controls['status'].hasError('required')" class="alert alert-danger">
+          Please Add Status
+      </div>
+      <br />
+      </div>
+          <div class=" form-group">
+              <label for="skills" class="col-sm-3 control-label"><b>Skills</b></label>
+              <input type="text" name="skills" id="skills" formControlName="skills" class="form-control" placeholder="Skills">
+              <div *ngIf="postjobForm.controls['skills'].hasError('required')" class="alert alert-danger">
+                Please Add Skills
+            </div>
+            <div *ngIf="postjobForm.controls['skills'].hasError('minlength')" class="alert alert-danger">
+                Please Add Minimum Length 1
+            </div>
+            </div>
+          <br />
+          <div class=" form-group">
+              <label for="companyName" class="col-sm-3 control-label"><b>Company Name</b></label>
+              <input type="text" name="companyName" id="companyName" formControlName="companyName" class="form-control" placeholder="Company Name">
+              <div *ngIf="postjobForm.controls['companyName'].hasError('required')" class="alert alert-danger">
+                Please Add Company Name
+            </div>
+            <div *ngIf="postjobForm.controls['companyName'].hasError('minlength')" class="alert alert-danger">
+                Please Add Minimum Length 4
+            </div>
+            </div>
+          <br />
+          <div class="form-group">
+            <button [disabled]="!postAJob.form.valid" type="submit" class="btn btn-primary">Post A Job</button>
+        </div> <br />
+  </div>
+   </form>
