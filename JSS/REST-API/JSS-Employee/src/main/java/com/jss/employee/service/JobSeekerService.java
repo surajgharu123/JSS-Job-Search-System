@@ -8,6 +8,6 @@ public interface JobSeekerService {
 	
 
 
-	public List<JobSeeker> filterJobSeekerBySkills(String skillSet,String authToken);
+	public List<JobSeeker> filterJobSeekerBySkills(String skillSet);
 
 }

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.jss.jobseeker.dto.JobDTO;
+import com.jss.jobseeker.dto.JobSeekerDTO;
 import com.jss.jobseeker.entity.JobEntity;
 import com.jss.jobseeker.entity.JobSeekerEntity;
 import com.jss.jobseeker.exception.InvalidAuthTokenException;
@@ -45,7 +46,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 
 	@Autowired
 	UserManagementDelegate userManagementDelegate;
-	
+
 	@Autowired
 	RestTemplate restTemplate;
 
@@ -143,8 +144,6 @@ public class JobSeekerServiceImple implements JobSeekerService {
 		return jobDTOs;
 	}
 
-
-
 	@Override
 	public Boolean applyForJob(JobDTO jobDto, String authToken) {
 
@@ -154,7 +153,7 @@ public class JobSeekerServiceImple implements JobSeekerService {
 			if (jodDetails.isPresent()) {
 				Integer jobId = ConvertEntityToDTO(jodDetails.get()).getId();
 				String username = userManagementDelegate.getUserName(authToken);
-				
+
 				if (username != null) {
 					JobSeekerEntity jobSeekerEntity = jobSeerkRepo.findByUsername(username);
 					jobSeekerEntity.setJobID(jobId);
@@ -179,17 +178,40 @@ public class JobSeekerServiceImple implements JobSeekerService {
 	@Override
 	public JobDTO getJobByID(int id, String authToken) {
 		// TODO Auto-generated method stub
-		if (userManagementDelegate.isTokenValidForEmployee(authToken)) {
-		Optional<JobEntity> jobEntity = jobSeeker.findById(id);
-		if (jobEntity.isPresent()) {
-			return ConvertEntityToDTO(jobEntity.get());
+		if (userManagementDelegate.isTokenValidForJobseeker(authToken)) {
+			Optional<JobEntity> jobEntity = jobSeeker.findById(id);
+			if (jobEntity.isPresent()) {
+				return ConvertEntityToDTO(jobEntity.get());
+
+			}
+			throw new InvalidSearchingDataException("Id is not Found");
 
 		}
-		throw new InvalidSearchingDataException("Id is not Found");
+		throw new InvalidAuthTokenException("Invalid Auth-Token");
 
 	}
-	throw new InvalidAuthTokenException("Invalid Auth-Token");
-		
+
+	@Override
+	public List<JobSeekerDTO> getJobSeekerDetails(String auth) {
+		// TODO Auto-generated method stub
+		if (userManagementDelegate.isTokenValidForEmployee(auth)) {
+			List<JobSeekerEntity> jobSeekerLists = jobSeerkRepo.findAll();
+			List<JobSeekerDTO> jobSeekerdto = new ArrayList<>();
+			for (JobSeekerEntity jobSeekerEntity : jobSeekerLists) {
+				jobSeekerdto.add(ConvertEntityToDTO(jobSeekerEntity));
+			}
+			return jobSeekerdto;
+		}
+		return null;
+	}
+
+	public JobSeekerEntity ConvertDTOToEntity(JobSeekerDTO jobSeekerDTO) {
+
+		return modelMapper.map(jobSeekerDTO, JobSeekerEntity.class);
+	}
+
+	public JobSeekerDTO ConvertEntityToDTO(JobSeekerEntity jobSeekerEntity) {
+		return modelMapper.map(jobSeekerEntity, JobSeekerDTO.class);
 	}
 
 }

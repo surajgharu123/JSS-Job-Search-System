@@ -36,9 +36,9 @@ export class JobsComponent implements OnInit {
   applyForAJob(job:any, buttonApply:any) {
 
     this.jobSeekerService.applyForJob(job).subscribe((serverResponse) => {
-         console.log(serverResponse);
          
-         console.log("You Applied For Job SuccessFully");
+         
+         alert("You Applied For Job SuccessFully");
          buttonApply = "Applied";
     }, (error) => {
       alert("You have not full fill cretia of job so you can't apply for this job");
@@ -51,9 +51,11 @@ export class JobsComponent implements OnInit {
   showDetails(job:any) {
     //console.log("the id value is ", job['id']);
     this.jobSeekerService.getSpecificJobDetails( job['id']).subscribe((responseData) => {
-      console.log(responseData);
+     
       this.jobSeekerService.SPECIFIC_DATA[0] = responseData;
       this.route.navigate(['/specific-job-details']);
+    },(error)=> {
+      alert("Sorry, Facing Some issues");
     })
   }
 

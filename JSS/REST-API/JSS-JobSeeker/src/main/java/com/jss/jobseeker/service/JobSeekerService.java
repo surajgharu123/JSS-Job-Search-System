@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.jss.jobseeker.dto.JobDTO;
+import com.jss.jobseeker.dto.JobSeekerDTO;
 
 
 public interface JobSeekerService {
@@ -20,6 +21,10 @@ public interface JobSeekerService {
 	public JobDTO getJobByID(int id,String authToken);
 	
 	public Boolean applyForJob(JobDTO jobDto, String authToken);
+	
+	public List<JobSeekerDTO> getJobSeekerDetails(String auth);
+
+
 	
 	
 

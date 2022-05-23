@@ -42,7 +42,7 @@ export class JobseekerLoginComponent {
         
       }
     }, (error)=> {
-      console.log("Server Error" , error);
+      console.log("Enter your Credentails once");
     })
 
   }

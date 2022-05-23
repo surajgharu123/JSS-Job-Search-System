@@ -52,12 +52,10 @@ class EmployeeControllerTest {
 		List<JobSeeker> jobDTOList = new ArrayList<JobSeeker>();
 		jobDTOList.add(new JobSeeker());
 		jobDTOList.add(new JobSeeker());
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set("Authorization", "#$%SDF");
-		when(this.jobSeekerService.filterJobSeekerBySkills("css", "#$%SDF")).thenReturn(jobDTOList);
+		when(this.jobSeekerService.filterJobSeekerBySkills("css")).thenReturn(jobDTOList);
 
 		MvcResult mvcResult = this.mockMvc.perform(get("http://localhost:5301/jss/employee/search/filtercriteria")
-				.headers(httpHeaders).param("skillSet", "css")).andExpect(status().isOk()).andReturn();
+				.param("skillSet", "css")).andExpect(status().isOk()).andReturn();
 
 		String response = mvcResult.getResponse().getContentAsString();
 		assertEquals(response.contains("address"), true);
