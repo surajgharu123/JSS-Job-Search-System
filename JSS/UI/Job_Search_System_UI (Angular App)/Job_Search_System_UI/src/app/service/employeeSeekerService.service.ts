@@ -92,5 +92,11 @@ export class EmployeeSeekerService {
         return this.httpClient.get<any>(this.BASE_API+"/search/filtercriteria",{params : param});
     
     }
+    searchJobById(id : number) : Observable<any>{
+        console.log(id);
+        let param = new HttpParams().set('jobID' , id);
+        return this.httpClient.get<any>(this.BASE_API+"/search",{params : param});
+
+    }
 
 }

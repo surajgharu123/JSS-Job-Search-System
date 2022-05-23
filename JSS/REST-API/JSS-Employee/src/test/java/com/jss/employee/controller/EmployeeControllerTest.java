@@ -100,12 +100,11 @@ class EmployeeControllerTest {
 		List<Job> job = new ArrayList<Job>();
 		job.add(new Job());
 		job.add(new Job());
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.set("Authorization", "D78KL");
-		when(this.jobService.searchByJobId(1, "D78KL")).thenReturn(job);
+
+		when(this.jobService.searchByJobId(1)).thenReturn(job);
 
 		MvcResult mvcResult = this.mockMvc
-				.perform(get("http://localhost:5500/jss/employee/search").headers(httpHeaders).param("jobID", "1"))
+				.perform(get("http://localhost:5500/jss/employee/search").param("jobID", "1"))
 				.andExpect(status().isOk()).andReturn();
 
 		String response = mvcResult.getResponse().getContentAsString();

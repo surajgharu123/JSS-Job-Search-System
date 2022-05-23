@@ -93,9 +93,8 @@ public class JobServiceImpl implements JobService {
 //	}
 
 	@Override
-	public List<Job> searchByJobId(Integer id, String authToken) {
+	public List<Job> searchByJobId(Integer id) {
 		List<Job> jobDTOs = new ArrayList<>();
-		if (employeeServiceDelegate.isTokenValid(authToken)) {
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			CriteriaQuery<JobEntity> criteriaQuery = criteriaBuilder.createQuery(JobEntity.class);
 			Root<JobEntity> root = criteriaQuery.from(JobEntity.class);
@@ -120,11 +119,11 @@ public class JobServiceImpl implements JobService {
 			if (jobDTOs.isEmpty()) {
 				throw new InvalidIdException("Entered Search Id not Avaiable");
 			}
-
+			return jobDTOs;
 		}
-		return jobDTOs;
 
-	}
+
+
 
 	@Override
 	public Job updateJob(int id, String authToken, Job job) {
