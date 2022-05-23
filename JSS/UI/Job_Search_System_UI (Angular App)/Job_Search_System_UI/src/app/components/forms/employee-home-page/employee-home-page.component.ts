@@ -34,6 +34,7 @@ export class EmployeeHomePageComponent implements OnInit {
       console.log(serverResponse);
       this.jobService.jobsData = serverResponse;
       this.filteredData = serverResponse;
+      this.idNumber=false;
     }, (error) => {
       alert("Entered Username & Password is not valid");
     })
