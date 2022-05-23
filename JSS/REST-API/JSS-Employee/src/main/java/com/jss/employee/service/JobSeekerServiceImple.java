@@ -41,10 +41,9 @@ public class JobSeekerServiceImple implements JobSeekerService {
 //	public List<JobSeeker> filterAdvertise(String skillSet) {
 //		
 	@Override
-	public List<JobSeeker> filterJobSeekerBySkills(String skillSet, String authToken) {
+	public List<JobSeeker> filterJobSeekerBySkills(String skillSet) {
 
 		List<JobSeeker> jobSeekerDTOs = new ArrayList<>();
-		if (employeeServiceDelegate.isTokenValid(authToken)) {
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			CriteriaQuery<JobSeekerEntity> criteriaQuery = criteriaBuilder.createQuery(JobSeekerEntity.class);
 			Root<JobSeekerEntity> root = criteriaQuery.from(JobSeekerEntity.class);
@@ -69,8 +68,6 @@ public class JobSeekerServiceImple implements JobSeekerService {
 
 			}
 
-		} else
-			throw new InvalidAuthTokenException();
 		return jobSeekerDTOs;
 
 	}

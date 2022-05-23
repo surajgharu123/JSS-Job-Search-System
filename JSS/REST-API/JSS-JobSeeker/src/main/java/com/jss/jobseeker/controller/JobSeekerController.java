@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jss.jobseeker.dto.JobDTO;
+import com.jss.jobseeker.dto.JobSeekerDTO;
 import com.jss.jobseeker.service.JobSeekerService;
 
 import io.swagger.annotations.ApiOperation;
@@ -76,8 +77,10 @@ public class JobSeekerController {
 		return new ResponseEntity<Boolean>(jobSeekerService.applyForJob(jobDTO,authToken), HttpStatus.ACCEPTED);
 	}
 	
-	
-	
-	
+	@ApiOperation(value = "Details of Jobseekers", notes = "This Rest API helps to show Jobseeker")
+	@GetMapping(value = "/applied/jobseeker", produces = { MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<JobSeekerDTO>> getJbseekersDetails(@RequestHeader("Authorization") String authToken) {
+	return new ResponseEntity<List<JobSeekerDTO>>(jobSeekerService.getJobSeekerDetails(authToken), HttpStatus.ACCEPTED);
+	}
 
 }

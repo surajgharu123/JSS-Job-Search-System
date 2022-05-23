@@ -47,9 +47,9 @@ public class EmployeeController {
 	@GetMapping(value = "/search/filtercriteria", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Getting a List of JobSeeker by FilterCriteria", notes = "This Rest API will return List of JobSeeker by Filter Criteria")
 	public ResponseEntity<List<JobSeeker>> searchByFilterCriteria(
-			@RequestParam(name = "skillSet", required = false) String skillSet, @RequestHeader("Authorization") String authToken)
+			@RequestParam(name = "skillSet", required = false) String skillSet)
 			 {
-		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet,authToken), HttpStatus.OK);
+		return new ResponseEntity<List<JobSeeker>>(jobSeekerService.filterJobSeekerBySkills(skillSet), HttpStatus.OK);
 	}
 	
 //	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
