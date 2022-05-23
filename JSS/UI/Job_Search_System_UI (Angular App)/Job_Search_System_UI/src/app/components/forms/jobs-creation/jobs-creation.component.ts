@@ -42,9 +42,9 @@ export class JobsCreationComponent  {
 
       };
       this.employeeService.postAJob(new_job).subscribe((serverResponse)=>{
-          console.log('jobseekerRegister Details - serviceResponse :',serverResponse);
+          console.log('posted job Details - serviceResponse :',serverResponse);
           this.job.push(serverResponse);
-         // this.route.navigate(['/employee-home']);
+          this.route.navigate(['/employee-home']);
       })
 
    console.log(this.postjobForm.value);

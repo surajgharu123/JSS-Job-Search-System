@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { EmployeeSeekerService } from 'src/app/service/employeeSeekerService.service';
 
@@ -23,7 +24,7 @@ export class EmployeeRegistrationComponent {
 
   })
   employees:any =[];
-  constructor ( private employeeServices : EmployeeSeekerService){
+  constructor ( private employeeServices : EmployeeSeekerService,private router : Router){
 
   }
 
@@ -42,6 +43,7 @@ export class EmployeeRegistrationComponent {
       this.employeeServices.employeeRegister(new_employee).subscribe((serverResponse)=>{
           console.log('employeeRegister Details - serviceResponse :',serverResponse);
           this.employees.push(serverResponse);
+          this.router.navigate(['/emp-login']);
       })
   
    console.log(this.employeeRegisterForm.value);
